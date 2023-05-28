@@ -4,7 +4,7 @@ import Sidebar from '../../components/Sidebar'
 
 export default function Dashboard() {
   return (
-    <div className="flex min-h-screen w-full bg-gray-50 font-sans text-gray-900">
+    <div className="flex w-full flex-1 bg-gray-50 font-sans text-gray-900">
       <Sidebar />
       <MainSide />
     </div>
