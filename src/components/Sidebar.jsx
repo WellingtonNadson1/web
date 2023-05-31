@@ -23,7 +23,7 @@ const sidebar = [
 export default function Sidebar() {
   return (
     <div>
-      <aside className="h-screen w-64 border-r border-gray-200 px-4 py-4">
+      <aside className="relative h-full w-60 bg-white px-4 py-6">
         <Image
           src="/images/Logo-IBB-Name.svg"
           width={54}
@@ -31,9 +31,9 @@ export default function Sidebar() {
           alt="Picture of the author"
           className="mx-2"
         />
-        <div className="pt-4">
-          <hr className="border-gray-300" />
-        </div>
+
+        <hr className="mt-4 h-px bg-transparent bg-gradient-to-r from-transparent via-black/40 to-transparent dark:bg-gradient-to-r dark:from-transparent dark:via-white dark:to-transparent" />
+
         <ul className="flex flex-col gap-y-2 pt-4">
           {sidebar.map((item) => (
             <li key={item.name}>

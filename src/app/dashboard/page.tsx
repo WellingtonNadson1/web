@@ -4,9 +4,12 @@ import Sidebar from '../../components/Sidebar'
 
 export default function Dashboard() {
   return (
-    <div className="flex w-full flex-1 bg-gray-50 font-sans text-gray-900">
-      <Sidebar />
-      <MainSide />
+    <div>
+      <div className="absolute top-0 min-h-[18.75rem] w-screen bg-[#1D70B6]"></div>
+      <div className="flex h-screen bg-slate-100">
+        <Sidebar />
+        <MainSide />
+      </div>
     </div>
   )
 }
