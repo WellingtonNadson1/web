@@ -1,3 +1,5 @@
+'use client'
+
 import {
   Baby,
   Calendar,
@@ -12,7 +14,7 @@ import Image from 'next/image'
 
 const sidebar = [
   { name: 'Dashboard', icon: House, href: '/dashboard' },
-  { name: 'Novo Memb.', icon: Baby, href: '/novo-mebro' },
+  { name: 'Novo Memb.', icon: Baby, href: '/novo-membro' },
   { name: 'Células', icon: Users, href: '/celulas' },
   { name: 'Supervisões', icon: UsersFour, href: '/supervisoes' },
   { name: 'Escolas', icon: Student, href: '/escolas' },
