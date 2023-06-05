@@ -32,11 +32,11 @@ export default function StatsCard() {
   ]
 
   return (
-    <div className="mx-auto mt-4 flex w-full items-center justify-between gap-4 p-2">
+    <div className="relative mx-auto mt-4 flex w-full items-center justify-between gap-4 p-2">
       {statusIbb.map((stat) => (
         <div
           key={stat.title}
-          className="flex-warp w-full cursor-pointer flex-col rounded-lg bg-white p-4 shadow-md hover:bg-white/95"
+          className="flex-warp relative w-full cursor-pointer flex-col rounded-lg bg-white p-4 shadow-md hover:bg-white/95"
         >
           <div className="flex w-full items-center justify-between">
             <div className="mb-0 font-sans text-sm font-semibold uppercase leading-normal">
