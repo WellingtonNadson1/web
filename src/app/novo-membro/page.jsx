@@ -39,7 +39,7 @@ export default function NovoMembro() {
                       htmlFor="last-name"
                       className="block text-sm font-medium leading-6 text-slate-700"
                     >
-                      Sobre Nome
+                      Sobrenome
                     </label>
                     <div className="mt-2">
                       <input

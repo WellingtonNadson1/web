@@ -32,7 +32,7 @@ export default function StatsCard() {
   ]
 
   return (
-    <div className="relative mx-auto mt-4 flex w-full items-center justify-between gap-4 p-2">
+    <div className="relative mx-auto mt-4 flex w-full flex-wrap items-center justify-between gap-4 p-2 md:flex-nowrap">
       {statusIbb.map((stat) => (
         <div
           key={stat.title}

@@ -12,14 +12,20 @@ import StatsCard from '../components/StatsCard'
 
 export default function MainSide() {
   return (
-    <main className="mx-autoh-full relative max-h-full w-full px-6 py-2">
+    <main className="relative mx-auto h-full w-full px-6 py-2">
       {/* Navbar */}
-      <nav className="duration-250 relative mx-2 flex flex-wrap items-center justify-between rounded-2xl px-0 shadow-none transition-all ease-in lg:flex-nowrap lg:justify-start">
-        <div className="flex-wrap-inherit mx-auto flex w-full items-center justify-between">
+      <nav className="relative mx-2 flex items-center justify-between rounded-2xl px-0 shadow-none">
+        <div className="mx-auto flex w-full flex-wrap items-center justify-between">
           {/* Titile Page */}
           <h1 className="text-3xl font-semibold leading-loose text-white">
             Dashboard
           </h1>
+        </div>
+        <div className="flex w-1/2 items-center justify-end gap-2 sm:w-1/2 sm:gap-8">
+          <p className="invisible text-xs text-gray-200 sm:visible">
+            terça, 06/06/23
+          </p>
+          <div className="h-10 w-10 rounded-full bg-gray-100 ring-1 ring-gray-600"></div>
         </div>
       </nav>
 

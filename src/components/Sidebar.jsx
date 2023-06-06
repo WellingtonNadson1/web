@@ -30,7 +30,7 @@ export default function Sidebar() {
     <div>
       <aside
         className={`relative h-full ${
-          open ? 'w-56' : 'w-16'
+          open ? 'w-56' : 'w-16 p-0'
         } bg-white px-4  py-6 duration-500`}
       >
         <Image
@@ -60,11 +60,15 @@ export default function Sidebar() {
             <li key={item.name}>
               <a
                 href={item.href}
-                className="group flex transform cursor-pointer items-center gap-x-2 rounded-md py-2 pl-2 text-sm font-medium leading-5 text-gray-500 transition duration-150 ease-in-out hover:scale-105 hover:bg-[#1D70B6] hover:text-gray-200 focus:outline-none"
+                className="group flex transform cursor-pointer items-center gap-x-2 rounded-md py-2 pl-2 text-sm font-medium leading-5 text-gray-500 transition duration-150 ease-in-out hover:scale-105 hover:bg-[#1D70B6] hover:fill-current hover:text-gray-200 focus:outline-none"
               >
-                <item.icon width={24} height={24} />
+                <item.icon
+                  className={`${!open ? 'w-screen' : ''}`}
+                  width={24}
+                  height={24}
+                />
                 <span
-                  className={`duration-400 whitespace-pre ${
+                  className={`whitespace-pre duration-150 ${
                     !open && 'translate-x-28 overflow-hidden opacity-0'
                   }`}
                 >
