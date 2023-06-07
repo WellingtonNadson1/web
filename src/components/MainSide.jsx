@@ -22,16 +22,20 @@ export default function MainSide() {
           </h1>
         </div>
         <div className="flex w-1/2 items-center justify-end gap-2 sm:w-1/2 sm:gap-8">
-          <p className="invisible text-xs text-gray-200 sm:visible">
+          <p className="hidden text-xs text-gray-200 sm:block">
             terça, 06/06/23
           </p>
-          <div className="h-10 w-10 rounded-full bg-gray-100 ring-1 ring-gray-600"></div>
+          <div className="h-10 w-10 rounded-full bg-gray-50 ring-1 ring-gray-600"></div>
         </div>
       </nav>
 
       <hr className="mt-2 h-px bg-transparent bg-gradient-to-r from-transparent via-black/40 to-transparent dark:bg-gradient-to-r dark:from-transparent dark:via-white dark:to-transparent" />
 
       <StatsCard />
+      <div className="mx-auto flex items-center justify-between px-2 py-4">
+        <div className="m-2 h-96 w-1/2 rounded-md bg-white/95 shadow"></div>
+        <div className="h-96 w-1/2 rounded-md bg-white/95 shadow"></div>
+      </div>
     </main>
   )
 }

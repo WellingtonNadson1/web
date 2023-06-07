@@ -4,9 +4,9 @@ export default function NovoMembro() {
   return (
     <div>
       <div className="absolute top-0 min-h-[18.75rem] w-screen bg-[#1D70B6]/90"></div>
-      <div className="flex h-full bg-slate-100">
+      <div className="flex h-full justify-between bg-slate-100">
         <Sidebar />
-        <div className="relative mx-auto w-full px-6 py-4">
+        <div className="relative mx-auto w-full px-6 py-8 sm:px-10">
           <div className="mx-auto w-full rounded-lg bg-white p-8">
             {/* Incio do Forms */}
             <form action="/dashboard" method="post">
@@ -15,7 +15,7 @@ export default function NovoMembro() {
                   Informações Pessoais
                 </h2>
 
-                <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-6 sm:grid-cols-6">
+                <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                   <div className="sm:col-span-3">
                     <label
                       htmlFor="first-name"
@@ -183,7 +183,10 @@ export default function NovoMembro() {
                       />
                     </div>
                   </div>
+                </div>
 
+                {/* INFORMAÇÕES DO REINO */}
+                <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                   <div className="sm:col-span-6">
                     <hr className="mx-0 my-4 h-px border-0 bg-transparent bg-gradient-to-r from-transparent via-black/50 to-transparent opacity-30" />
                     <h2 className="mt-8 text-sm uppercase leading-normal text-gray-400">
@@ -306,8 +309,10 @@ export default function NovoMembro() {
                       </select>
                     </div>
                   </div>
+                </div>
 
-                  {/* Escolas Realizadas */}
+                {/* Escolas Realizadas */}
+                <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                   <div className="mt-2 sm:col-span-6">
                     <fieldset>
                       <legend className="block text-sm font-medium leading-6 text-slate-700">
@@ -389,8 +394,10 @@ export default function NovoMembro() {
                       </div>
                     </fieldset>
                   </div>
+                </div>
 
-                  {/* Econtros Realizados */}
+                {/* Econtros Realizados */}
+                <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                   <div className="mt-2 sm:col-span-6">
                     <fieldset>
                       <legend className="block text-sm font-medium leading-6 text-slate-700">
@@ -436,8 +443,10 @@ export default function NovoMembro() {
                       </div>
                     </fieldset>
                   </div>
+                </div>
 
-                  {/* INFORMAÇÕES CONJUGAIS */}
+                {/* INFORMAÇÕES CONJUGAIS */}
+                <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                   <div className="sm:col-span-6">
                     <hr className="mx-0 my-4 h-px border-0 bg-transparent bg-gradient-to-r from-transparent via-black/50 to-transparent opacity-30" />
                     <h2 className="mt-8 text-sm uppercase leading-normal text-gray-400">
@@ -538,15 +547,19 @@ export default function NovoMembro() {
                       />
                     </div>
                   </div>
+                </div>
 
-                  {/* Informações para Visita */}
+                {/* Informações para Visita */}
+                <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                   <div className="sm:col-span-6">
                     <hr className="mx-0 my-4 h-px border-0 bg-transparent bg-gradient-to-r from-transparent via-black/50 to-transparent opacity-30" />
                     <h2 className="mt-8 text-sm uppercase leading-normal text-gray-400">
                       Endereço para Visita/Contato
                     </h2>
                   </div>
+                </div>
 
+                <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                   <div className="sm:col-span-2">
                     <label
                       htmlFor="postal-code"
@@ -600,7 +613,9 @@ export default function NovoMembro() {
                       />
                     </div>
                   </div>
+                </div>
 
+                <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                   <div className="col-span-5">
                     <label
                       htmlFor="street-address"

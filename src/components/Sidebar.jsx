@@ -64,8 +64,8 @@ export default function Sidebar() {
               >
                 <item.icon
                   className={`${!open ? 'w-screen' : ''}`}
-                  width={24}
-                  height={24}
+                  width={`${open ? 24 : 26}`}
+                  height={`${open ? 24 : 26}`}
                 />
                 <span
                   className={`whitespace-pre duration-150 ${
