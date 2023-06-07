@@ -99,7 +99,7 @@ export default function NovoMembro() {
                       <select
                         id="sexo"
                         name="sexo"
-                        className="block w-full rounded-md border-0 py-1.5 text-slate-700 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:max-w-xs sm:text-sm sm:leading-6"
+                        className="block w-full rounded-md border-0 py-1.5 text-slate-700 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
                       >
                         <option>M</option>
                         <option>F</option>
@@ -153,7 +153,7 @@ export default function NovoMembro() {
                       <select
                         id="escolaridade"
                         name="escolaridade"
-                        className="block w-full rounded-md border-0 py-1.5 text-slate-700 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:max-w-xs sm:text-sm sm:leading-6"
+                        className="block w-full rounded-md border-0 py-1.5 text-slate-700 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
                       >
                         <option>Sem Escolaridade</option>
                         <option>Fundamental Incompleto</option>
@@ -202,7 +202,7 @@ export default function NovoMembro() {
                       <select
                         id="batizado"
                         name="batizado"
-                        className="block w-full rounded-md border-0 py-1.5 text-slate-700 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:max-w-xs sm:text-sm sm:leading-6"
+                        className="block w-full rounded-md border-0 py-1.5 text-slate-700 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
                       >
                         <option>Sim</option>
                         <option>Não</option>
@@ -238,7 +238,7 @@ export default function NovoMembro() {
                       <select
                         id="is-discipulado"
                         name="is-discipulado"
-                        className="block w-full rounded-md border-0 py-1.5 text-slate-700 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:max-w-xs sm:text-sm sm:leading-6"
+                        className="block w-full rounded-md border-0 py-1.5 text-slate-700 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
                       >
                         <option>Sim</option>
                         <option>Não</option>
@@ -274,7 +274,7 @@ export default function NovoMembro() {
                       <select
                         id="supervisao"
                         name="supervisao"
-                        className="block w-full rounded-md border-0 py-1.5 text-slate-700 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:max-w-xs sm:text-sm sm:leading-6"
+                        className="block w-full rounded-md border-0 py-1.5 text-slate-700 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
                       >
                         <option>Vermelha</option>
                         <option>Azul</option>
@@ -296,7 +296,7 @@ export default function NovoMembro() {
                       <select
                         id="celula"
                         name="celula"
-                        className="block w-full rounded-md border-0 py-1.5 text-slate-700 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:max-w-xs sm:text-sm sm:leading-6"
+                        className="block w-full rounded-md border-0 py-1.5 text-slate-700 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
                       >
                         <option>Betel</option>
                         <option>Kadosh</option>
@@ -457,7 +457,7 @@ export default function NovoMembro() {
                         id="estado-civil"
                         name="estado-civil"
                         autoComplete="estado-civil-name"
-                        className="block w-full rounded-md border-0 py-1.5 text-slate-700 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:max-w-xs sm:text-sm sm:leading-6"
+                        className="block w-full rounded-md border-0 py-1.5 text-slate-700 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
                       >
                         <option>Casado(a)</option>
                         <option>Solteiro(a)</option>
@@ -514,7 +514,7 @@ export default function NovoMembro() {
                         id="tem-filho"
                         name="tem-filho"
                         autoComplete="estado-civil-name"
-                        className="block w-full rounded-md border-0 py-1.5 text-slate-700 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:max-w-xs sm:text-sm sm:leading-6"
+                        className="block w-full rounded-md border-0 py-1.5 text-slate-700 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
                       >
                         <option>Sim</option>
                         <option>Não</option>
