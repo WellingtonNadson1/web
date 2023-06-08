@@ -1,6 +1,44 @@
+'use client'
+import { SubmitHandler, useForm } from 'react-hook-form'
 import Sidebar from '../../components/Sidebar'
 
+interface Inputs {
+  firstName: string
+  lastName: string
+  cpf: string
+  dateNasc: Date
+  sexo: string
+  email: string
+  telefone: string
+  escolaridade: string
+  profissao: string
+  batizado: string
+  dateBatizado: Date
+  isDiscipulado: string
+  discipulador: string
+  supervisao: string
+  celula: string
+  escolaPrincipios?: string
+  escolaFundamentos?: string
+  escolaDisicipulos?: string
+  escolaOracao?: string
+  encontroDeus?: string
+  encontroDD?: string
+  estadoCivil?: string
+  nomeConjuge?: string
+  dateCasamento?: Date
+  hasFilho?: string
+  quantidadeFilho?: number
+  cep: string
+  cidade: string
+  estado: string
+  endereco: string
+  numberHouse: string
+}
+
 export default function NovoMembro() {
+  const { register, handleSubmit } = useForm<Inputs>()
+  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data)
   return (
     <div>
       <div className="absolute top-0 min-h-[18.75rem] w-screen bg-[#1D70B6]/90"></div>
@@ -9,7 +47,11 @@ export default function NovoMembro() {
         <div className="relative mx-auto w-full px-6 py-8 sm:px-10">
           <div className="mx-auto w-full rounded-lg bg-white p-8">
             {/* Incio do Forms */}
-            <form action="/dashboard" method="post">
+            <form
+              onSubmit={handleSubmit(onSubmit)}
+              action="/dashboard"
+              method="post"
+            >
               <div className="border-b border-gray-900/10 pb-12">
                 <h2 className="text-sm uppercase leading-normal text-gray-400">
                   Informações Pessoais
@@ -18,16 +60,17 @@ export default function NovoMembro() {
                 <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                   <div className="sm:col-span-3">
                     <label
-                      htmlFor="first-name"
+                      htmlFor="firstName"
                       className="block text-sm font-medium leading-6 text-slate-700"
                     >
                       Primeiro Nome
                     </label>
                     <div className="mt-2">
                       <input
+                        {...register('firstName')}
                         type="text"
-                        name="first-name"
-                        id="first-name"
+                        name="firstName"
+                        id="firstName"
                         autoComplete="given-name"
                         className="block w-full rounded-md border-0 py-1.5 text-slate-700 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
                       />
@@ -36,16 +79,17 @@ export default function NovoMembro() {
 
                   <div className="sm:col-span-3">
                     <label
-                      htmlFor="last-name"
+                      htmlFor="lastName"
                       className="block text-sm font-medium leading-6 text-slate-700"
                     >
                       Sobrenome
                     </label>
                     <div className="mt-2">
                       <input
+                        {...register('lastName')}
                         type="text"
-                        name="last-name"
-                        id="last-name"
+                        name="lastName"
+                        id="lastName"
                         autoComplete="family-name"
                         className="block w-full rounded-md border-0 py-1.5 text-slate-700 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
                       />
@@ -61,6 +105,7 @@ export default function NovoMembro() {
                     </label>
                     <div className="mt-2">
                       <input
+                        {...register('cpf')}
                         type="text"
                         name="cpf"
                         id="cpf"
@@ -72,16 +117,17 @@ export default function NovoMembro() {
 
                   <div className="sm:col-span-2">
                     <label
-                      htmlFor="data-nascimento"
+                      htmlFor="dateNasc"
                       className="block text-sm font-medium leading-6 text-slate-700"
                     >
                       Dt. Nasc.
                     </label>
                     <div className="mt-2">
                       <input
+                        {...register('dateNasc')}
                         type="date"
-                        name="data-nascimento"
-                        id="data-nascimento"
+                        name="dateNasc"
+                        id="dateNasc"
                         autoComplete="family-name"
                         className="block w-full rounded-md border-0 py-1.5 text-slate-700 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
                       />
@@ -97,12 +143,13 @@ export default function NovoMembro() {
                     </label>
                     <div className="mt-2">
                       <select
+                        {...register('sexo')}
                         id="sexo"
                         name="sexo"
                         className="block w-full rounded-md border-0 py-1.5 text-slate-700 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
                       >
-                        <option>M</option>
-                        <option>F</option>
+                        <option value={'M'}>M</option>
+                        <option value={'F'}>F</option>
                       </select>
                     </div>
                   </div>
@@ -116,6 +163,7 @@ export default function NovoMembro() {
                     </label>
                     <div className="mt-2">
                       <input
+                        {...register('email')}
                         id="email"
                         name="email"
                         type="email"
@@ -134,6 +182,7 @@ export default function NovoMembro() {
                     </label>
                     <div className="mt-2">
                       <input
+                        {...register('telefone')}
                         id="telefone"
                         name="telefone"
                         type="text"
@@ -151,18 +200,31 @@ export default function NovoMembro() {
                     </label>
                     <div className="mt-3">
                       <select
+                        {...register('escolaridade')}
                         id="escolaridade"
                         name="escolaridade"
                         className="block w-full rounded-md border-0 py-1.5 text-slate-700 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
                       >
-                        <option>Sem Escolaridade</option>
-                        <option>Fundamental Incompleto</option>
-                        <option>Fundamental Completo</option>
-                        <option>Médio Incompleto</option>
-                        <option>Médio Completo</option>
-                        <option>Superio Incompleto</option>
-                        <option>Superio Completo</option>
-                        <option>Pós Graduado</option>
+                        <option value={'Sem Escolaridade'}>
+                          Sem Escolaridade
+                        </option>
+                        <option value={'Fundamental Incompleto'}>
+                          Fundamental Incompleto
+                        </option>
+                        <option value={'Fundamental Completo'}>
+                          Fundamental Completo
+                        </option>
+                        <option value={'Médio Incompleto'}>
+                          Médio Incompleto
+                        </option>
+                        <option value={'Médio Completo'}>Médio Completo</option>
+                        <option value={'Superio Incompleto'}>
+                          Superio Incompleto
+                        </option>
+                        <option value={'Superio Completo'}>
+                          Superio Completo
+                        </option>
+                        <option value={'Pós Graduado'}>Pós Graduado</option>
                       </select>
                     </div>
                   </div>
@@ -203,27 +265,29 @@ export default function NovoMembro() {
                     </label>
                     <div className="mt-3">
                       <select
+                        {...register('batizado')}
                         id="batizado"
                         name="batizado"
                         className="block w-full rounded-md border-0 py-1.5 text-slate-700 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
                       >
-                        <option>Sim</option>
-                        <option>Não</option>
+                        <option value={'Sim'}>Sim</option>
+                        <option value={'Nao'}>Não</option>
                       </select>
                     </div>
                   </div>
 
                   <div className="sm:col-span-3">
                     <label
-                      htmlFor="data-batismo"
+                      htmlFor="dateBatizado"
                       className="block text-sm font-medium leading-6 text-slate-700"
                     >
                       Dt. Batismo
                     </label>
                     <div className="mt-2">
                       <input
-                        id="data-batismo"
-                        name="data-batismo"
+                        {...register('dateBatizado')}
+                        id="dateBatizado"
+                        name="dateBatizado"
                         type="date"
                         className="block w-full rounded-md border-0 py-1.5 text-slate-700 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
                       />
@@ -239,12 +303,13 @@ export default function NovoMembro() {
                     </label>
                     <div className="mt-3">
                       <select
+                        {...register('isDiscipulado')}
                         id="is-discipulado"
                         name="is-discipulado"
                         className="block w-full rounded-md border-0 py-1.5 text-slate-700 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
                       >
-                        <option>Sim</option>
-                        <option>Não</option>
+                        <option value={'Sim'}>Sim</option>
+                        <option value={'Nao'}>Não</option>
                       </select>
                     </div>
                   </div>
@@ -258,6 +323,7 @@ export default function NovoMembro() {
                     </label>
                     <div className="mt-2">
                       <input
+                        {...register('discipulador')}
                         id="discipulador"
                         name="discipulador"
                         type="text"
@@ -275,15 +341,16 @@ export default function NovoMembro() {
                     </label>
                     <div className="mt-3">
                       <select
+                        {...register('supervisao')}
                         id="supervisao"
                         name="supervisao"
                         className="block w-full rounded-md border-0 py-1.5 text-slate-700 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
                       >
-                        <option>Vermelha</option>
-                        <option>Azul</option>
-                        <option>Verde</option>
-                        <option>Amarela</option>
-                        <option>Laranja</option>
+                        <option value={'Vermelha'}>Vermelha</option>
+                        <option value={'Azul'}>Azul</option>
+                        <option value={'Verde'}>Verde</option>
+                        <option value={'Amarela'}>Amarela</option>
+                        <option value={'Laranja'}>Laranja</option>
                       </select>
                     </div>
                   </div>
@@ -297,15 +364,17 @@ export default function NovoMembro() {
                     </label>
                     <div className="mt-3">
                       <select
+                        {...register('celula')}
                         id="celula"
                         name="celula"
                         className="block w-full rounded-md border-0 py-1.5 text-slate-700 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
                       >
-                        <option>Betel</option>
-                        <option>Kadosh</option>
-                        <option>Rute</option>
-                        <option>Confins da Terra</option>
-                        <option>Kadosh</option>
+                        <option value={'Betel'}>Betel</option>
+                        <option value={'Kadosh'}>Kadosh</option>
+                        <option value={'Rute'}>Rute</option>
+                        <option value={'Confins da Terra'}>
+                          Confins da Terra
+                        </option>
                       </select>
                     </div>
                   </div>
@@ -322,15 +391,16 @@ export default function NovoMembro() {
                         <div className="relative flex gap-x-3">
                           <div className="flex h-6 items-center">
                             <input
-                              id="principios"
-                              name="principios"
+                              {...register('escolaPrincipios')}
+                              id="escolaPrincipios"
+                              name="escolaPrincipios"
                               type="checkbox"
                               className="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-600"
                             />
                           </div>
                           <div className="text-sm leading-6">
                             <label
-                              htmlFor="principios"
+                              htmlFor="escolaPrincipios"
                               className="font-medium text-slate-700"
                             >
                               Princípios
@@ -340,15 +410,16 @@ export default function NovoMembro() {
                         <div className="relative flex gap-x-3">
                           <div className="flex h-6 items-center">
                             <input
-                              id="fundamentos"
-                              name="fundamentos"
+                              {...register('escolaFundamentos')}
+                              id="escolaFundamentos"
+                              name="escolaFundamentos"
                               type="checkbox"
                               className="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-600"
                             />
                           </div>
                           <div className="text-sm leading-6">
                             <label
-                              htmlFor="fundamentos"
+                              htmlFor="escolaFundamentos"
                               className="font-medium text-slate-700"
                             >
                               Fundamentos
@@ -358,15 +429,16 @@ export default function NovoMembro() {
                         <div className="relative flex gap-x-3">
                           <div className="flex h-6 items-center">
                             <input
-                              id="disicipulos"
-                              name="disicipulos"
+                              {...register('escolaDisicipulos')}
+                              id="escolaDisicipulos"
+                              name="escolaDisicipulos"
                               type="checkbox"
                               className="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-600"
                             />
                           </div>
                           <div className="text-sm leading-6">
                             <label
-                              htmlFor="disicipulos"
+                              htmlFor="escolaDisicipulos"
                               className="font-medium text-slate-700"
                             >
                               Discípulos
@@ -376,15 +448,16 @@ export default function NovoMembro() {
                         <div className="relative flex gap-x-3">
                           <div className="flex h-6 items-center">
                             <input
-                              id="oracao"
-                              name="oracao"
+                              {...register('escolaOracao')}
+                              id="escolaOracao"
+                              name="escolaOracao"
                               type="checkbox"
                               className="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-600"
                             />
                           </div>
                           <div className="text-sm leading-6">
                             <label
-                              htmlFor="oracao"
+                              htmlFor="escolaOracao"
                               className="font-medium text-slate-700"
                             >
                               Oração
@@ -407,15 +480,16 @@ export default function NovoMembro() {
                         <div className="relative flex gap-x-3">
                           <div className="flex h-6 items-center">
                             <input
-                              id="econtro-deus"
-                              name="econtro-deus"
+                              {...register('encontroDeus')}
+                              id="encontroDeus"
+                              name="encontroDeus"
                               type="checkbox"
                               className="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-600"
                             />
                           </div>
                           <div className="text-sm leading-6">
                             <label
-                              htmlFor="econtro-deus"
+                              htmlFor="encontroDeus"
                               className="font-medium text-slate-700"
                             >
                               Encontro com Deus
@@ -425,15 +499,16 @@ export default function NovoMembro() {
                         <div className="relative flex gap-x-3">
                           <div className="flex h-6 items-center">
                             <input
-                              id="edd"
-                              name="edd"
+                              {...register('encontroDD')}
+                              id="encontroDD"
+                              name="encontroDD"
                               type="checkbox"
                               className="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-600"
                             />
                           </div>
                           <div className="text-sm leading-6">
                             <label
-                              htmlFor="edd"
+                              htmlFor="encontroDD"
                               className="font-medium text-slate-700"
                             >
                               Econtro de Disc. c/ Deus
@@ -456,39 +531,39 @@ export default function NovoMembro() {
 
                   <div className="sm:col-span-2">
                     <label
-                      htmlFor="estado-civil"
+                      htmlFor="estadoCivil"
                       className="block text-sm font-medium leading-6 text-slate-700"
                     >
                       Estado Civil
                     </label>
                     <div className="mt-2">
                       <select
-                        id="estado-civil"
-                        name="estado-civil"
-                        autoComplete="estado-civil-name"
+                        {...register('estadoCivil')}
+                        id="estadoCivil"
+                        name="estadoCivil"
                         className="block w-full rounded-md border-0 py-1.5 text-slate-700 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
                       >
-                        <option>Casado(a)</option>
-                        <option>Solteiro(a)</option>
-                        <option>Viúvo(a)</option>
-                        <option>Divórciado(a)</option>
+                        <option value={'Casado'}>Casado(a)</option>
+                        <option value={'Solteiro'}>Solteiro(a)</option>
+                        <option value={'Viuvo'}>Viúvo(a)</option>
+                        <option value={'Divorciado'}>Divórciado(a)</option>
                       </select>
                     </div>
                   </div>
 
                   <div className="sm:col-span-4">
                     <label
-                      htmlFor="conjuge-name"
+                      htmlFor="nomeConjuge"
                       className="block text-sm font-medium leading-6 text-slate-700"
                     >
                       Nome Conjuge
                     </label>
                     <div className="mt-2">
                       <input
+                        {...register('nomeConjuge')}
                         type="text"
-                        name="conjuge-name"
-                        id="conjuge-name"
-                        autoComplete="family-name"
+                        name="nomeConjuge"
+                        id="nomeConjuge"
                         className="block w-full rounded-md border-0 py-1.5 text-slate-700 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
                       />
                     </div>
@@ -496,16 +571,17 @@ export default function NovoMembro() {
 
                   <div className="sm:col-span-2">
                     <label
-                      htmlFor="data-casamento"
+                      htmlFor="dateCasamento"
                       className="block text-sm font-medium leading-6 text-slate-700"
                     >
                       Data/Casamento
                     </label>
                     <div className="mt-2">
                       <input
+                        {...register('dateCasamento')}
                         type="date"
-                        name="data-casamento"
-                        id="data-casamento"
+                        name="dateCasamento"
+                        id="dateCasamento"
                         className="block w-full rounded-md border-0 py-1.5 text-slate-700 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
                       />
                     </div>
@@ -513,36 +589,37 @@ export default function NovoMembro() {
 
                   <div className="sm:col-span-2">
                     <label
-                      htmlFor="tem-filho"
+                      htmlFor="hasFilho"
                       className="block text-sm font-medium leading-6 text-slate-700"
                     >
                       Tem Filho?
                     </label>
                     <div className="mt-2">
                       <select
-                        id="tem-filho"
-                        name="tem-filho"
-                        autoComplete="estado-civil-name"
+                        {...register('hasFilho')}
+                        id="hasFilho"
+                        name="hasFilho"
                         className="block w-full rounded-md border-0 py-1.5 text-slate-700 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
                       >
-                        <option>Sim</option>
-                        <option>Não</option>
+                        <option value={'Sim'}>Sim</option>
+                        <option value={'Nao'}>Não</option>
                       </select>
                     </div>
                   </div>
 
                   <div className="sm:col-span-2">
                     <label
-                      htmlFor="qntd-filho"
+                      htmlFor="quantidadeFilho"
                       className="block text-sm font-medium leading-6 text-slate-700"
                     >
                       Qntd. Filho(s)
                     </label>
                     <div className="mt-2">
                       <input
+                        {...register('quantidadeFilho')}
                         type="text"
-                        name="qntd-filho"
-                        id="qntd-filho"
+                        name="quantidadeFilho"
+                        id="quantidadeFilho"
                         className="block w-full rounded-md border-0 py-1.5 text-slate-700 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
                       />
                     </div>
@@ -562,17 +639,17 @@ export default function NovoMembro() {
                 <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                   <div className="sm:col-span-2">
                     <label
-                      htmlFor="postal-code"
+                      htmlFor="cep"
                       className="block text-sm font-medium leading-6 text-slate-700"
                     >
                       Cep
                     </label>
                     <div className="mt-2">
                       <input
+                        {...register('cep')}
                         type="text"
-                        name="postal-code"
-                        id="postal-code"
-                        autoComplete="postal-code"
+                        name="cep"
+                        id="cep"
                         className="block w-full rounded-md border-0 py-1.5 text-slate-700 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
                       />
                     </div>
@@ -580,17 +657,17 @@ export default function NovoMembro() {
 
                   <div className="sm:col-span-2">
                     <label
-                      htmlFor="city"
+                      htmlFor="cidade"
                       className="block text-sm font-medium leading-6 text-slate-700"
                     >
                       Cidade
                     </label>
                     <div className="mt-2">
                       <input
+                        {...register('cidade')}
                         type="text"
-                        name="city"
-                        id="city"
-                        autoComplete="address-level2"
+                        name="cidade"
+                        id="cidade"
                         className="block w-full rounded-md border-0 py-1.5 text-slate-700 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
                       />
                     </div>
@@ -598,16 +675,17 @@ export default function NovoMembro() {
 
                   <div className="sm:col-span-2">
                     <label
-                      htmlFor="region"
+                      htmlFor="estado"
                       className="block text-sm font-medium leading-6 text-slate-700"
                     >
                       Estado
                     </label>
                     <div className="mt-2">
                       <input
+                        {...register('estado')}
                         type="text"
-                        name="region"
-                        id="region"
+                        name="estado"
+                        id="estado"
                         autoComplete="address-level1"
                         className="block w-full rounded-md border-0 py-1.5 text-slate-700 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
                       />
@@ -618,33 +696,34 @@ export default function NovoMembro() {
                 <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                   <div className="col-span-5">
                     <label
-                      htmlFor="street-address"
+                      htmlFor="endereco"
                       className="block text-sm font-medium leading-6 text-slate-700"
                     >
                       Endereço
                     </label>
                     <div className="mt-2">
                       <input
+                        {...register('endereco')}
                         type="text"
-                        name="street-address"
-                        id="street-address"
-                        autoComplete="street-address"
+                        name="endereco"
+                        id="endereco"
                         className="block w-full rounded-md border-0 py-1.5 text-slate-700 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
                       />
                     </div>
                   </div>
                   <div className="col-span-1">
                     <label
-                      htmlFor="number-house"
+                      htmlFor="numberHouse"
                       className="block text-sm font-medium leading-6 text-slate-700"
                     >
                       Nº
                     </label>
                     <div className="mt-2">
                       <input
+                        {...register('numberHouse')}
                         type="text"
-                        name="number-house"
-                        id="number-house"
+                        name="numberHouse"
+                        id="numberHouse"
                         className="block w-full rounded-md border-0 py-1.5 text-slate-700 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
                       />
                     </div>
