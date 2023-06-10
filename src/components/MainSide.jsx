@@ -12,7 +12,7 @@ import StatsCard from '../components/StatsCard'
 
 export default function MainSide() {
   return (
-    <main className="relative mx-auto h-full w-full px-6 py-2">
+    <main className="relative z-10 mx-auto h-full w-full px-6 py-2">
       {/* Navbar */}
       <nav className="relative mx-2 flex items-center justify-between rounded-2xl px-0 shadow-none">
         <div className="mx-auto flex w-full flex-wrap items-center justify-between">

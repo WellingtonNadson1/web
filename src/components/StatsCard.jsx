@@ -32,7 +32,7 @@ export default function StatsCard() {
   ]
 
   return (
-    <div className="relative mx-auto mt-4 flex w-full flex-wrap items-center justify-between gap-4 p-2 md:flex-nowrap">
+    <div className="relative z-10 mx-auto mt-4 flex w-full flex-wrap items-center justify-between gap-4 p-2 md:flex-nowrap">
       {statusIbb.map((stat) => (
         <div
           key={stat.title}
@@ -42,7 +42,7 @@ export default function StatsCard() {
             <div className="mb-0 font-sans text-sm font-semibold uppercase leading-normal">
               {stat.title}
             </div>
-            <div className={`rounded-full ${stat.color} p-2`}>
+            <div className={`rounded-full ${stat.color} p-2 drop-shadow-md`}>
               <stat.icon width={24} height={24} color="#fff" />
             </div>
           </div>

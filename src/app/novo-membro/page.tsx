@@ -1,6 +1,5 @@
 'use client'
 import { SubmitHandler, useForm } from 'react-hook-form'
-import Sidebar from '../../components/Sidebar'
 
 interface Inputs {
   firstName: string
@@ -43,7 +42,6 @@ export default function NovoMembro() {
     <div>
       <div className="absolute top-0 min-h-[18.75rem] w-screen bg-[#1D70B6]/90"></div>
       <div className="flex h-full justify-between bg-slate-100">
-        <Sidebar />
         <div className="relative mx-auto w-full px-6 py-8 sm:px-10">
           <div className="mx-auto w-full rounded-lg bg-white p-8">
             {/* Incio do Forms */}

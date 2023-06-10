@@ -1,7 +1,8 @@
+import Sidebar from '@/components/Sidebar'
 import { Inter } from 'next/font/google'
 import React from 'react'
-import './globals.css'
 import { NextAuthProvider } from './Provider'
+import './globals.css'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -18,7 +19,17 @@ export default async function RootLayout({
   return (
     <html lang="pt">
       <body className={inter.className}>
-        <NextAuthProvider>{children}</NextAuthProvider>
+        <div className="overflow-x-auto overflow-y-auto">
+          <div className="absolute top-0 -z-0 min-h-[18.75rem] w-screen bg-[#1D70B6]/90">
+            {' '}
+          </div>
+          <div className="flex min-h-screen bg-slate-100">
+            <NextAuthProvider>
+              <Sidebar />
+              {children}
+            </NextAuthProvider>
+          </div>
+        </div>
       </body>
     </html>
   )
