@@ -1,3 +1,4 @@
+import { NextAuthProvider } from '@/app/Provider'
 import React from 'react'
 
 export const metadata = {
@@ -10,5 +11,9 @@ export default async function LoginLayout({
 }: {
   children: React.ReactNode
 }) {
-  return <>{children}</>
+  return (
+    <>
+      <NextAuthProvider>{children}</NextAuthProvider>
+    </>
+  )
 }
