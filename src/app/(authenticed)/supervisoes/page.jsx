@@ -1,10 +1,14 @@
+'use client'
 import Header from '@/components/Header'
-import React from 'react'
+import StatsCardSupervision from '@/components/StatsCardSupervision'
 
 export default function Supervisoes() {
   return (
-    <div className="mx-auto px-4 py-2">
-      <Header titlePage="Supervisões" />
+    <div className="mx-auto w-full px-4 py-2">
+      <div className="mx-auto w-full">
+        <Header titlePage="Supervisões" />
+      </div>
+      <StatsCardSupervision />
     </div>
   )
 }
