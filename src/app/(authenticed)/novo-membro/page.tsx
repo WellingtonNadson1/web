@@ -1,4 +1,5 @@
 'use client'
+import Header from '@/components/Header'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
 interface Inputs {
@@ -39,11 +40,13 @@ export default function NovoMembro() {
   const { register, handleSubmit } = useForm<Inputs>()
   const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data)
   return (
-    <div>
-      <div className="absolute top-0 min-h-[18.75rem] w-screen bg-[#1D70B6]/90"></div>
-      <div className="flex h-full justify-between bg-slate-100">
-        <div className="relative mx-auto w-full px-6 py-8 sm:px-10">
-          <div className="mx-auto w-full rounded-lg bg-white p-8">
+    <div className="w-full">
+      <div className="mx-auto px-4 py-2">
+        <Header titlePage="Novo Membro" />
+      </div>
+      <div className="flex justify-between bg-slate-100">
+        <div className="relative mx-auto px-4 py-8 sm:px-6">
+          <div className="mx-auto rounded-lg bg-white p-8">
             {/* Incio do Forms */}
             <form
               onSubmit={handleSubmit(onSubmit)}

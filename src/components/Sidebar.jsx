@@ -30,7 +30,7 @@ export default function Sidebar() {
     <div className="shadow">
       <aside
         className={`relative h-full ${
-          open ? 'w-56' : 'w-20'
+          open ? 'w-48' : 'w-20'
         } bg-white px-4  py-6 duration-500`}
       >
         <a href="/dashboard">
@@ -47,7 +47,7 @@ export default function Sidebar() {
 
         <div
           className={`absolute top-[3.9rem] z-50 flex cursor-pointer justify-end rounded-full border border-[#014874] bg-[#3e98e1] p-1.5 text-3xl text-white duration-500 hover:rounded-full hover:bg-slate-400/90 hover:fill-white ${
-            open ? 'ml-[12.2rem]' : 'ml-[3.2rem] rotate-45'
+            open ? 'ml-[10.2rem]' : 'ml-[3.15rem] rotate-45'
           } `}
           onClick={() => setOpen(!open)}
         >
