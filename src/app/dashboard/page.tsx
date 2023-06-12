@@ -3,10 +3,10 @@ import MainSide from '../../components/MainSide'
 
 export default function Dashboard() {
   return (
-    <div className="overflow-x-auto overflow-y-auto">
-      <div className="flex min-h-screen bg-slate-100">
+    <>
+      <div className="w-screen">
         <MainSide />
       </div>
-    </div>
+    </>
   )
 }
