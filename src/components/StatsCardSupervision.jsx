@@ -1,4 +1,4 @@
-import { Cross } from '@phosphor-icons/react'
+import { UsersFour } from '@phosphor-icons/react'
 
 export default function StatsCardSupervision() {
   const supervisoesIbb = [
@@ -7,7 +7,7 @@ export default function StatsCardSupervision() {
       supervisor: 'Ana Ceila',
       total: '234',
       status: 'up',
-      icon: Cross,
+      icon: UsersFour,
       color: 'bg-[#F55343]',
       nivel: 'Área',
     },
@@ -16,7 +16,7 @@ export default function StatsCardSupervision() {
       supervisor: 'Zedequias',
       total: '334',
       status: 'up',
-      icon: Cross,
+      icon: UsersFour,
       color: 'bg-[#43a2f5]',
       nivel: 'Distrito',
     },
@@ -25,7 +25,7 @@ export default function StatsCardSupervision() {
       supervisor: 'Carlos e Thaisa',
       total: '234',
       status: 'up',
-      icon: Cross,
+      icon: UsersFour,
       color: 'bg-[#e2de5f]',
       nivel: 'Área',
     },
@@ -34,7 +34,7 @@ export default function StatsCardSupervision() {
       supervisor: 'Paulo e Patrícia',
       total: '234',
       status: 'up',
-      icon: Cross,
+      icon: UsersFour,
       color: 'bg-[#f58224]',
       nivel: 'Área',
     },
@@ -43,7 +43,7 @@ export default function StatsCardSupervision() {
       supervisor: 'Alécio e Iraneide',
       total: '234',
       status: 'up',
-      icon: Cross,
+      icon: UsersFour,
       color: 'bg-[#5fe2c2]',
       nivel: 'Área',
     },
