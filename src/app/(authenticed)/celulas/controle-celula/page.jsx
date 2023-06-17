@@ -69,7 +69,7 @@ export default function ControleCelula() {
     },
   ]
   return (
-    <div className="relative w-full">
+    <div className="relative mx-auto w-full px-4 py-2">
       <div className="mx-auto w-full px-4 py-2">
         <Header titlePage="Controle de Célula" />
       </div>
@@ -77,31 +77,32 @@ export default function ControleCelula() {
         <Calendar />
       </div>
       <div className="relative mx-auto w-full px-4 py-2">
-        <div className="w-full rounded bg-white p-4">
-          <div className="rounded-md border p-2">
-            <table className="w-full table-auto px-2">
+        <div className="w-full rounded-xl bg-white px-4 py-2 shadow-lg">
+          <div className="w-full rounded-md px-4 py-2">
+            <table className="w-full table-auto border-separate border-spacing-y-2 px-2">
               <thead>
                 <tr>
                   <th className="text-start text-gray-800">Nome</th>
                   <th className="text-gray-800">Status</th>
-                  <th className="text-gray-800">Tipo</th>
-                  <th className="text-gray-800">Presença</th>
+                  <th className="hidden text-gray-800 sm:block">Tipo</th>
+                  <th className="text-gray-800">P</th>
+                  <th className="text-gray-800">F</th>
                 </tr>
               </thead>
               <tbody className="px-4">
                 {membrosCelula.map((membro) => (
                   <tr
-                    className="hover:rounded-md hover:bg-gray-100/90"
+                    className="my-6 align-middle hover:rounded-md hover:bg-gray-100/90"
                     key={membro.id}
                   >
                     <td>
-                      <div className="mb-2 flex items-center justify-start gap-2">
+                      <div className="my-2 flex items-center justify-start gap-3">
                         <Image
                           src={membro.imagePerfil}
-                          width={22}
-                          height={22}
+                          width={28}
+                          height={28}
                           alt={membro.nomeMembroCelula}
-                          className={`cursor-pointer rounded-full`}
+                          className={`cursor-pointer rounded-full shadow`}
                         />
                         <h2>{membro.nomeMembroCelula}</h2>
                       </div>
@@ -117,35 +118,40 @@ export default function ControleCelula() {
                         {membro.status}
                       </span>
                     </td>
-                    <td className="text-center text-gray-700">{membro.tipo}</td>
-                    <td>
+                    <td className="mt-2 hidden text-center align-middle text-gray-700 sm:block">
+                      {membro.tipo}
+                    </td>
+
+                    <td className="mr-1 text-center">
                       <div className="flex items-center justify-center gap-3 sm:gap-8">
                         <input
                           id="presente"
-                          name="presente"
-                          type="checkbox"
-                          className="h-4 w-4 cursor-pointer rounded border-gray-300 text-green-600 focus:ring-green-600"
+                          name={`presenca-${membro.id}`}
+                          type="radio"
+                          className="h-4 w-4 cursor-pointer border-green-300 text-green-600 focus:ring-green-600"
                         />
+                      </div>
+                    </td>
+                    <td className="ml-1 text-center">
+                      <div className="flex items-center justify-center gap-3 sm:gap-8">
                         <input
                           id="faltou"
-                          name="faltou"
-                          type="checkbox"
-                          className="h-4 w-4 cursor-pointer rounded border-gray-300 text-red-600 focus:ring-red-600"
+                          name={`presenca-${membro.id}`}
+                          type="radio"
+                          className="h-4 w-4 cursor-pointer border-red-300 text-red-600 focus:ring-red-600"
                         />
                       </div>
                     </td>
                   </tr>
                 ))}
-                <div className="w-full">
-                  <div className="w-1/2">
-                    <button
-                      className='type="submit"
-                    className="flex w-full justify-center rounded-md bg-[#014874] px-3 py-1.5 text-sm font-semibold leading-7 text-white shadow-sm duration-100 hover:bg-[#1D70B6] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#014874]'
-                      type="submit"
-                    >
-                      Registrar
-                    </button>
-                  </div>
+                <div className="mt-4 flex w-full items-center justify-between">
+                  <div></div>
+                  <button
+                    className="mx-auto w-full rounded-md bg-[#014874] px-3 py-1.5 text-sm font-semibold leading-7 text-white shadow-sm duration-100 hover:bg-[#1D70B6] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#014874]"
+                    type="submit"
+                  >
+                    Registrar
+                  </button>
                 </div>
               </tbody>
             </table>
