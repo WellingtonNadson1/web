@@ -85,7 +85,7 @@ export default function Celulas() {
                       <td>
                         <a
                           className="block rounded-md bg-green-500 p-2 text-center text-sm font-semibold leading-3 text-white hover:bg-green-600"
-                          href="/celula/controle-celula"
+                          href="/celulas/controle-celula"
                         >
                           Lançar
                         </a>
