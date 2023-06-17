@@ -1,7 +1,7 @@
 import Header from '@/components/Header'
 import Link from 'next/link'
 
-export default function Celulas() {
+export default function CelulasSupervision() {
   const celulas = [
     {
       id: 1,
@@ -87,7 +87,7 @@ export default function Celulas() {
                         <div>
                           <Link
                             className="block rounded-md bg-green-500 px-4 py-2 text-center text-sm font-medium leading-3 text-white shadow-sm ring-1 ring-slate-700/10 duration-150 hover:bg-green-600"
-                            href="/celulas/controle-celula"
+                            href="/supervisoes/celulas/controle-celula"
                           >
                             Lançar
                           </Link>

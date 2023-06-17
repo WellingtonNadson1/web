@@ -11,7 +11,10 @@ import {
   isEqual,
   isSameDay,
   isSameMonth,
+  isSaturday,
+  isSunday,
   isToday,
+  isWednesday,
   parse,
   parseISO,
   startOfToday,
@@ -96,11 +99,11 @@ export default function Example() {
   )
 
   return (
-    <div className="pt-8">
-      <div className="rounded-lg bg-white px-4 py-6 shadow-md">
-        <div className="mx-auto max-w-md px-6 sm:px-8 md:max-w-4xl md:px-8">
+    <div className="pt-4">
+      <div className="rounded-lg bg-white px-2 py-6 shadow-md">
+        <div className="mx-auto max-w-md px-4 sm:px-4 md:max-w-4xl md:px-6">
           <div className="md:grid md:grid-cols-2 md:divide-x md:divide-gray-200">
-            <div className="md:pr-14">
+            <div className="md:pr-10">
               <div className="flex items-center">
                 <h2 className="flex-auto font-semibold text-gray-900">
                   {format(firstDayCurrentMonth, 'MMMM yyyy', { locale: pt })}
@@ -137,7 +140,7 @@ export default function Example() {
                     key={day.toString()}
                     className={classNames(
                       (dayIdx === 0 && colStartClasses[getDay(day)]) || '',
-                      'py-1.5',
+                      'py-1',
                     )}
                   >
                     <button
@@ -175,12 +178,22 @@ export default function Example() {
                         {format(day, 'd')}
                       </time>
                     </button>
-
-                    <div className="mx-auto mt-1 h-1 w-1">
+                    {/* Pontos de Eventos */}
+                    <div className="mx-auto flex items-center justify-center gap-1">
                       {meetings.some((meeting) =>
                         isSameDay(parseISO(meeting.startDatetime), day),
                       ) && (
-                        <div className="h-1 w-1 rounded-full bg-sky-500"></div>
+                        <div className="mt-1 h-1 w-1">
+                          <div className="h-1 w-1 rounded-full bg-sky-500"></div>
+                        </div>
+                      )}
+
+                      {isSaturday(day) || isWednesday(day) || isSunday(day) ? (
+                        <div className="mt-1 h-1 w-1">
+                          <div className="h-1 w-1 rounded-full bg-orange-500"></div>
+                        </div>
+                      ) : (
+                        ''
                       )}
                     </div>
                   </div>

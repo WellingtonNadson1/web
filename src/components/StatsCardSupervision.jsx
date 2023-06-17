@@ -1,4 +1,5 @@
 import { UsersFour } from '@phosphor-icons/react'
+import Link from 'next/link'
 
 export default function StatsCardSupervision() {
   const supervisoesIbb = [
@@ -50,38 +51,42 @@ export default function StatsCardSupervision() {
   ]
   return (
     <>
-      <div className='className="relative py-2" z-10 mx-auto w-full'>
-        <div className="relative z-10 mx-auto mt-3 grid w-full grid-cols-1 flex-wrap items-center justify-between gap-4 p-2 sm:grid-cols-2 md:flex-nowrap">
-          {supervisoesIbb.map((stat) => (
-            <div
-              key={stat.title}
-              className={`flex-warp relative w-full cursor-pointer flex-col rounded-lg bg-white p-4 shadow-md hover:bg-white/95`}
-            >
-              <div className="flex w-full items-center justify-between">
-                <div className="mb-0 font-sans text-sm font-semibold uppercase leading-normal">
-                  {stat.title}
+      <Link href="/supervisoes/celulas">
+        <div className='className="relative py-2" z-10 mx-auto w-full'>
+          <div className="relative z-10 mx-auto mt-3 grid w-full grid-cols-1 flex-wrap items-center justify-between gap-4 p-2 sm:grid-cols-2 md:flex-nowrap">
+            {supervisoesIbb.map((stat) => (
+              <div
+                key={stat.title}
+                className={`flex-warp relative w-full cursor-pointer flex-col rounded-lg bg-white p-4 shadow-md hover:bg-white/95`}
+              >
+                <div className="flex w-full items-center justify-between">
+                  <div className="mb-0 font-sans text-sm font-semibold uppercase leading-normal">
+                    {stat.title}
+                  </div>
+                  <div
+                    className={`rounded-full ${stat.color} p-2 drop-shadow-md`}
+                  >
+                    <stat.icon width={24} height={24} color="#fff" />
+                  </div>
                 </div>
-                <div
-                  className={`rounded-full ${stat.color} p-2 drop-shadow-md`}
-                >
-                  <stat.icon width={24} height={24} color="#fff" />
+                <div className="flex items-center">
+                  <span className="text-lg font-semibold">
+                    {stat.supervisor}
+                  </span>
+                </div>
+                <div className="flex items-center">
+                  <span className="text-sm font-bold leading-normal text-emerald-500">
+                    {stat.porcentagem}
+                  </span>
+                  <span className="ml-2 text-sm font-bold leading-normal text-gray-500">
+                    {stat.nivel}
+                  </span>
                 </div>
               </div>
-              <div className="flex items-center">
-                <span className="text-lg font-semibold">{stat.supervisor}</span>
-              </div>
-              <div className="flex items-center">
-                <span className="text-sm font-bold leading-normal text-emerald-500">
-                  {stat.porcentagem}
-                </span>
-                <span className="ml-2 text-sm font-bold leading-normal text-gray-500">
-                  {stat.nivel}
-                </span>
-              </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
-      </div>
+      </Link>
     </>
   )
 }

@@ -1,5 +1,6 @@
 import { format } from 'date-fns'
 import { pt } from 'date-fns/locale'
+import Image from 'next/image'
 
 type TitlePage = {
   titlePage: string
@@ -23,7 +24,15 @@ export default function Header(props: TitlePage) {
             </h2>
             <p className="hidden text-xs text-gray-700 sm:block">{toDay}</p>
           </div>
-          <div className="h-10 w-10 rounded-full bg-gray-50 ring-1 ring-gray-600"></div>
+          <div className="h-10 w-10 rounded-full bg-gray-50 ring-1 ring-gray-600">
+            <Image
+              src="/images/man3.jpg"
+              width={58}
+              height={58}
+              alt="Wellington"
+              className={`cursor-pointer rounded-full shadow`}
+            />
+          </div>
         </div>
       </nav>
     </>

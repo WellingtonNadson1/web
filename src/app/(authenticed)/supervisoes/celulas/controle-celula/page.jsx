@@ -2,7 +2,7 @@ import Calendar from '@/components/Calendar'
 import Header from '@/components/Header'
 import Image from 'next/image'
 
-export default function ControleCelula() {
+export default function ControleCelulaSupervision() {
   const membrosCelula = [
     {
       id: 1,
@@ -77,9 +77,9 @@ export default function ControleCelula() {
         <Calendar />
       </div>
       <div className="relative mx-auto w-full rounded-xl bg-white px-2 py-2 shadow-lg">
-        <div className="w-full  px-4 py-2 ">
+        <div className="w-full px-2 py-2 ">
           <div className="w-full rounded-md px-4 py-2">
-            <table className="w-full table-auto border-separate border-spacing-y-2 px-2">
+            <table className="w-full table-auto border-separate border-spacing-y-2">
               <thead>
                 <tr>
                   <th className="text-start text-gray-800">Nome</th>
@@ -99,8 +99,8 @@ export default function ControleCelula() {
                       <div className="my-2 flex items-center justify-start gap-3">
                         <Image
                           src={membro.imagePerfil}
-                          width={28}
-                          height={28}
+                          width={40}
+                          height={40}
                           alt={membro.nomeMembroCelula}
                           className={`cursor-pointer rounded-full shadow`}
                         />
@@ -123,40 +123,31 @@ export default function ControleCelula() {
                     </td>
 
                     <td className="mr-1 text-center">
-                      <div className="flex items-center justify-center gap-3 sm:gap-8">
-                        <input
-                          id="presente"
-                          name={`presenca-${membro.id}`}
-                          type="radio"
-                          className="h-4 w-4 cursor-pointer border-green-300 text-green-600 focus:ring-green-600"
-                        />
-                      </div>
+                      <input
+                        id="presente"
+                        name={`presenca-${membro.id}`}
+                        type="radio"
+                        className="h-4 w-4 cursor-pointer border-green-300 text-green-600 focus:ring-green-600"
+                      />
                     </td>
                     <td className="ml-1 text-center">
-                      <div className="flex items-center justify-center gap-3 sm:gap-8">
-                        <input
-                          id="faltou"
-                          name={`presenca-${membro.id}`}
-                          type="radio"
-                          className="h-4 w-4 cursor-pointer border-red-300 text-red-600 focus:ring-red-600"
-                        />
-                      </div>
+                      <input
+                        id="faltou"
+                        name={`presenca-${membro.id}`}
+                        type="radio"
+                        className="h-4 w-4 cursor-pointer border-red-300 text-red-600 focus:ring-red-600"
+                      />
                     </td>
                   </tr>
                 ))}
-                <tr>
-                  <div className="mt-4 flex w-full items-center justify-between">
-                    <div></div>
-                    <button
-                      className="mx-auto w-full rounded-md bg-[#014874] px-3 py-1.5 text-sm font-semibold leading-7 text-white shadow-sm duration-100 hover:bg-[#1D70B6] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#014874]"
-                      type="submit"
-                    >
-                      Registrar
-                    </button>
-                  </div>
-                </tr>
               </tbody>
             </table>
+            <button
+              className="mx-auto w-full rounded-md bg-[#014874] px-3 py-1.5 text-sm font-semibold leading-7 text-white shadow-sm duration-100 hover:bg-[#1D70B6] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#014874]"
+              type="submit"
+            >
+              Registrar
+            </button>
           </div>
         </div>
       </div>
