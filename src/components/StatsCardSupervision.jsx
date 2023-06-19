@@ -51,12 +51,11 @@ export default function StatsCardSupervision() {
   ]
   return (
     <>
-      <Link href="/supervisoes/celulas">
-        <div className='className="relative py-2" z-10 mx-auto w-full'>
-          <div className="relative z-10 mx-auto mt-3 grid w-full grid-cols-1 flex-wrap items-center justify-between gap-4 p-2 sm:grid-cols-2 md:flex-nowrap">
-            {supervisoesIbb.map((stat) => (
+      <div className='className="relative py-2" z-10 mx-auto w-full'>
+        <div className="relative z-10 mx-auto mt-3 grid w-full grid-cols-1 flex-wrap items-center justify-between gap-4 p-2 sm:grid-cols-2 md:flex-nowrap">
+          {supervisoesIbb.map((stat) => (
+            <Link key={stat.title} href="/supervisoes/celulas">
               <div
-                key={stat.title}
                 className={`flex-warp relative w-full cursor-pointer flex-col rounded-lg bg-white p-4 shadow-md hover:bg-white/95`}
               >
                 <div className="flex w-full items-center justify-between">
@@ -83,10 +82,10 @@ export default function StatsCardSupervision() {
                   </span>
                 </div>
               </div>
-            ))}
-          </div>
+            </Link>
+          ))}
         </div>
-      </Link>
+      </div>
     </>
   )
 }

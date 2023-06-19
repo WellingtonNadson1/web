@@ -1,5 +1,6 @@
 import Calendar from '@/components/Calendar'
 import Header from '@/components/Header'
+import LicoesCelula from '@/components/LicoesCelula'
 import Image from 'next/image'
 
 export default function ControleCelulaSupervision() {
@@ -73,10 +74,13 @@ export default function ControleCelulaSupervision() {
       <div className="relative mx-auto w-full px-2 py-2">
         <Header titlePage="Cont. de Célula" />
       </div>
-      <div className="relative mx-auto mb-2 w-full px-2 py-2">
+      <div className="relative mx-auto mb-2 w-full">
         <Calendar />
       </div>
-      <div className="relative mx-auto w-full rounded-xl bg-white px-2 py-2 shadow-lg">
+      <div className="relative mx-auto mb-2 w-full">
+        <LicoesCelula />
+      </div>
+      <div className="relative mx-auto w-full rounded-xl bg-white px-4 py-2 shadow-lg">
         <div className="w-full px-2 py-2 ">
           <div className="w-full rounded-md px-4 py-2">
             <table className="w-full table-auto border-separate border-spacing-y-2">

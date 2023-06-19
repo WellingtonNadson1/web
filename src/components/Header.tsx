@@ -24,7 +24,7 @@ export default function Header(props: TitlePage) {
             </h2>
             <p className="hidden text-xs text-gray-700 sm:block">{toDay}</p>
           </div>
-          <div className="h-10 w-10 rounded-full bg-gray-50 ring-1 ring-gray-600">
+          <div className="h-10 w-10 rounded-full bg-gray-50">
             <Image
               src="/images/man3.jpg"
               width={58}
