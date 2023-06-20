@@ -41,7 +41,7 @@ export default function NovoMembro() {
   const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data)
   return (
     <div className="w-full">
-      <div className="mx-auto px-4 py-2">
+      <div className="mx-auto px-2 py-2">
         <Header titlePage="Novo Membro" />
       </div>
       <div className="flex justify-between bg-slate-100">
