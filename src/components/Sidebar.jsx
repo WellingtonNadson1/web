@@ -12,6 +12,7 @@ import {
   X,
 } from '@phosphor-icons/react'
 import Image from 'next/image'
+import Link from 'next/link'
 import { useState } from 'react'
 
 const sidebar = [
@@ -30,10 +31,10 @@ export default function Sidebar() {
     <div className="shadow">
       <aside
         className={`relative h-full ${
-          open ? 'w-48' : 'w-20'
+          open ? 'w-48' : 'w-[4.8rem]'
         } bg-white px-4  py-6 duration-500`}
       >
-        <a href="/dashboard">
+        <Link href="/dashboard">
           <Image
             src="/images/logo-ibb-1.svg"
             width={54}
@@ -43,11 +44,11 @@ export default function Sidebar() {
               !open ? 'mx-auto' : 'mx-2'
             } transition-all duration-200`}
           />
-        </a>
+        </Link>
 
         <div
-          className={`absolute top-[3.9rem] z-50 flex cursor-pointer justify-end rounded-full border border-[#014874] bg-[#3e98e1] p-1.5 text-3xl text-white duration-500 hover:rounded-full hover:bg-slate-400/90 hover:fill-white ${
-            open ? 'ml-[10.2rem]' : 'ml-[3.15rem] rotate-45'
+          className={`absolute top-[3.8rem] z-50 flex cursor-pointer justify-end rounded-full border border-white bg-[#3e98e1] p-1.5 text-3xl text-white duration-500 hover:rounded-full hover:bg-slate-400/90 hover:fill-white ${
+            open ? 'ml-[10.2rem]' : 'ml-[3.04rem] rotate-45'
           } `}
           onClick={() => setOpen(!open)}
         >
@@ -64,7 +65,7 @@ export default function Sidebar() {
         <ul className="relative flex flex-col gap-y-2 pt-4">
           {sidebar.map((item) => (
             <li key={item.name} className="z-50">
-              <a
+              <Link
                 href={item.href}
                 className="group flex transform cursor-pointer items-center gap-x-2 rounded-md py-2 pl-2 text-sm font-medium leading-5 text-gray-500 transition duration-150 ease-in-out hover:scale-105 hover:bg-[#1D70B6] hover:fill-current hover:text-gray-200 focus:outline-none"
               >
@@ -87,7 +88,7 @@ export default function Sidebar() {
                 >
                   {item.name}
                 </span>
-              </a>
+              </Link>
             </li>
           ))}
         </ul>

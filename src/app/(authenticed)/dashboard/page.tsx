@@ -5,7 +5,7 @@ import MainSide from '@/components/MainSide'
 export default function Dashboard() {
   return (
     <>
-      <div className="relative mx-auto w-full px-2 py-2">
+      <div className="mx-auto w-full px-2 py-2">
         {/* Navbar */}
         <Header titlePage="Dashboard" />
         <MainSide />

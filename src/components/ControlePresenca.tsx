@@ -71,25 +71,38 @@ export default function ControlePresenca() {
     <>
       <div className="relative mx-auto w-full rounded-xl bg-white px-4 py-2 shadow-lg">
         <div className="w-full px-2 py-2 ">
-          <div className="w-full rounded-md px-4 py-2">
-            <table className="w-full table-auto border-separate border-spacing-y-2">
+          <div className="w-full rounded-md px-1 py-2">
+            <h2 className="text-lg font-semibold leading-7 text-gray-800">
+              Lista de Presença
+            </h2>
+            <table className="w-full table-auto border-separate border-spacing-y-6">
               <thead>
-                <tr>
-                  <th className="text-start text-gray-800">Nome</th>
-                  <th className="text-gray-800">Status</th>
-                  <th className="hidden text-gray-800 sm:block">Tipo</th>
-                  <th className="text-gray-800">P</th>
-                  <th className="text-gray-800">F</th>
+                <tr className="text-base font-bold ">
+                  <th className="border-b-2 border-blue-300 py-2 text-start text-gray-800">
+                    Nome
+                  </th>
+                  <th className="border-b-2 border-orange-300 py-2 text-gray-800">
+                    Status
+                  </th>
+                  <th className="hidden border-b-2 border-indigo-300 py-2 text-gray-800 sm:block">
+                    Tipo
+                  </th>
+                  <th className="border-b-2 border-green-300 py-2 text-gray-800">
+                    P
+                  </th>
+                  <th className="border-b-2 border-red-300 py-2 text-gray-800">
+                    F
+                  </th>
                 </tr>
               </thead>
-              <tbody className="px-4">
+              <tbody className="text-sm font-normal text-gray-700">
                 {membrosCelula.map((membro) => (
                   <tr
-                    className="my-6 align-middle hover:rounded-md hover:bg-gray-100/90"
+                    className="border-b border-gray-200 py-8 hover:bg-gray-100/90"
                     key={membro.id}
                   >
                     <td>
-                      <div className="my-2 flex items-center justify-start gap-3">
+                      <div className="flex items-center justify-start gap-3">
                         <Image
                           src={membro.imagePerfil}
                           width={40}
@@ -102,16 +115,18 @@ export default function ControlePresenca() {
                     </td>
                     <td className="text-center">
                       <span
-                        className={`w-full rounded-md px-2 py-1 text-center text-sm ${
+                        className={`w-full rounded-md px-2 py-1 text-center ${
                           membro.status === 'Ativo'
                             ? 'border border-green-200 bg-green-100 ring-green-500'
+                            : membro.status === 'Líder'
+                            ? 'border border-blue-200 bg-blue-100 ring-blue-500'
                             : 'border border-orange-200 bg-orange-100 ring-orange-500'
                         }`}
                       >
                         {membro.status}
                       </span>
                     </td>
-                    <td className="mt-2 hidden text-center align-middle text-gray-700 sm:block">
+                    <td className="mt-2 hidden text-center sm:block">
                       {membro.tipo}
                     </td>
 

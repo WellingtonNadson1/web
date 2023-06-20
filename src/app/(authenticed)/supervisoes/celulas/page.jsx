@@ -50,15 +50,15 @@ export default function CelulasSupervision() {
     },
   ]
   return (
-    <div className="relative mx-auto w-full py-2">
-      <div className="relative mx-auto w-full px-2">
+    <div className="relative z-10 mx-auto w-full px-2 py-2">
+      <div className="relative mx-auto w-full">
         <Header titlePage="Células" />
       </div>
 
       {/* Presenca */}
-      <div className="relative mx-auto w-full">
-        <div className="relative mx-auto w-full px-6 py-2">
-          <div className="w-full rounded bg-white p-4 shadow-md">
+      <div className="relative mx-auto mt-3 w-full p-2">
+        <div className="relative mx-auto w-full py-2">
+          <div className="w-full rounded-lg bg-white p-4 shadow-md">
             <div className="p-2">
               <table className="w-full table-auto border-separate border-spacing-y-2 px-2">
                 <thead>
