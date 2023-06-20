@@ -62,10 +62,10 @@ const meetings = [
   },
   {
     id: 5,
-    name: 'Michael Foster',
-    imageUrl: '/images/man1.avif',
-    startDatetime: '2023-06-30T14:00',
-    endDatetime: '2023-06-30T14:30',
+    name: 'Aniversário Pr. Pedro',
+    imageUrl: '/images/pr-pedro.png',
+    startDatetime: '2023-06-29T00:00',
+    endDatetime: '2023-06-29T23:59',
   },
 ]
 

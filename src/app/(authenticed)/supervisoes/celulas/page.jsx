@@ -50,8 +50,8 @@ export default function CelulasSupervision() {
     },
   ]
   return (
-    <div className="relative mx-auto w-full px-4 py-2">
-      <div className="relative mx-auto w-full px-4 py-2">
+    <div className="relative mx-auto w-full py-2">
+      <div className="relative mx-auto w-full px-1 py-2">
         <Header titlePage="Células" />
       </div>
 
