@@ -56,7 +56,7 @@ export default function Celulas() {
       </div>
 
       {/* Presenca */}
-      <div className="relative mx-auto w-full">
+      <div className="relative mx-auto mt-3 w-full">
         <div className="relative mx-auto w-full px-2 py-2">
           <div className="w-full rounded bg-white p-4 shadow-md">
             <div className="p-2">
