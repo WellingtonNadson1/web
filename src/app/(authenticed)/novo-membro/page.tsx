@@ -40,13 +40,11 @@ export default function NovoMembro() {
   const { register, handleSubmit } = useForm<Inputs>()
   const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data)
   return (
-    <div className="w-full">
-      <div className="mx-auto px-2 py-2">
-        <Header titlePage="Novo Membro" />
-      </div>
-      <div className="flex justify-between bg-slate-100">
-        <div className="relative mx-auto px-4 py-8 sm:px-6">
-          <div className="mx-auto rounded-lg bg-white p-8">
+    <div className="relative mx-auto w-full px-2 py-2">
+      <Header titlePage="Novo Membro" />
+      <div className="flex justify-between">
+        <div className="relative mx-auto px-2 py-7">
+          <div className="mx-auto rounded-lg bg-white p-6">
             {/* Incio do Forms */}
             <form
               onSubmit={handleSubmit(onSubmit)}
