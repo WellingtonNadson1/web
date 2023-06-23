@@ -1,20 +1,15 @@
 'use client'
-import { GoogleLogo, SignOut } from '@phosphor-icons/react'
-import { signIn, signOut, useSession } from 'next-auth/react'
+import { GoogleLogo } from '@phosphor-icons/react'
+import { signIn, useSession } from 'next-auth/react'
 import Image from 'next/image'
+import Link from 'next/link'
+import { redirect } from 'next/navigation'
 
 export default function Login() {
   const { data: session } = useSession()
 
   if (session) {
-    return (
-      <div>
-        <p>Welcome, {session.user.name}</p>
-        <button onClick={() => signOut()}>
-          <SignOut size={24} />
-        </button>
-      </div>
-    )
+    return redirect('/dashboard')
   } else {
     return (
       <section className="flex min-h-screen flex-col items-center justify-center gap-4 bg-[#F5F7F9]">
@@ -138,12 +133,12 @@ export default function Login() {
 
               <p className="mb-4 mt-8 text-center text-sm text-gray-500">
                 Não tem uma conta?{' '}
-                <a
+                <Link
                   href="#"
                   className="font-semibold leading-6 text-[#014874] hover:text-[#1D70B6]"
                 >
                   Cadastre-se
-                </a>
+                </Link>
               </p>
             </div>
           </div>

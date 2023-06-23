@@ -1,5 +1,6 @@
 import { NextAuthProvider } from '@/app/Provider'
 import React from 'react'
+import '../globals.css'
 
 export const metadata = {
   title: 'App IBB',
