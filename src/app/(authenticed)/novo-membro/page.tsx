@@ -1,5 +1,7 @@
 'use client'
 import Header from '@/components/Header'
+import { useSession } from 'next-auth/react'
+import { redirect } from 'next/navigation'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
 interface Inputs {
@@ -37,11 +39,17 @@ interface Inputs {
 }
 
 export default function NovoMembro() {
+  const { data: session } = useSession({
+    required: true,
+    onUnauthenticated() {
+      redirect('/login?callbackUrl=/dashboard')
+    },
+  })
   const { register, handleSubmit } = useForm<Inputs>()
   const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data)
   return (
     <div className="relative mx-auto w-full px-2 py-2">
-      <Header titlePage="Novo Membro" />
+      <Header session={session} titlePage="Novo Membro" />
       <div className="flex justify-between">
         <div className="relative mx-auto px-2 py-7">
           <div className="mx-auto rounded-lg bg-white p-6">

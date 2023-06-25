@@ -1,9 +1,11 @@
 import { format } from 'date-fns'
 import { pt } from 'date-fns/locale'
+import { Session } from 'next-auth'
 import Image from 'next/image'
 
 type TitlePage = {
   titlePage: string
+  session: Session | null
 }
 
 export default function Header(props: TitlePage) {
@@ -20,19 +22,24 @@ export default function Header(props: TitlePage) {
         <div className="flex w-1/2 items-center justify-end gap-2 sm:w-1/2 sm:gap-8">
           <div>
             <h2 className="hidden text-xs text-gray-700 sm:block">
-              Shalom, <span className="font-bold">Wellington</span>
+              Shalom,{' '}
+              <span className="font-bold">{props.session?.user?.name}</span>
             </h2>
             <p className="hidden text-xs text-gray-700 sm:block">{toDay}</p>
           </div>
-          <div className="h-10 w-10 rounded-full bg-gray-50">
-            <Image
-              src="/images/man3.jpg"
-              width={58}
-              height={58}
-              alt="Wellington"
-              className={`cursor-pointer rounded-full shadow`}
-            />
-          </div>
+          {props.session?.user?.image ? (
+            <div className="h-10 w-10 rounded-full bg-gray-50">
+              <Image
+                src={props.session.user.image}
+                width={58}
+                height={58}
+                alt="Wellington"
+                className={`cursor-pointer rounded-full shadow`}
+              />
+            </div>
+          ) : (
+            <div className="h-10 w-10 rounded-full bg-gray-50">fail</div>
+          )}
         </div>
       </nav>
     </>
