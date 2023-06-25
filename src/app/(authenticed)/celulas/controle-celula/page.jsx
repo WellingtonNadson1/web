@@ -1,3 +1,4 @@
+'use client'
 import Calendar from '@/components/Calendar'
 import ControlePresenca from '@/components/ControlePresenca'
 import Header from '@/components/Header'

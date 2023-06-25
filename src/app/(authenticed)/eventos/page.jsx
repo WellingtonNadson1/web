@@ -1,3 +1,4 @@
+'use client'
 import Calendar from '@/components/Calendar'
 import Header from '@/components/Header'
 import { useSession } from 'next-auth/react'

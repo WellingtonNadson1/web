@@ -1,3 +1,4 @@
+'use client'
 import Header from '@/components/Header'
 import ListCelulas from '@/components/ListCelulas'
 import { useSession } from 'next-auth/react'
