@@ -26,6 +26,7 @@ const sidebar = [
   { name: 'Relatórios', icon: ChartBar, href: '/relatorios' },
   { name: 'Eventos', icon: Calendar, href: '/eventos' },
   { name: 'Fincanceiro', icon: Wallet, href: '/financeiro' },
+  { name: 'Sair', icon: SignOut, href: `${() => signOut()}` },
 ]
 export default function Sidebar() {
   const [open, setOpen] = useState(false)
@@ -69,7 +70,11 @@ export default function Sidebar() {
             <li key={item.name} className="z-50">
               <Link
                 href={item.href}
-                className="group flex transform cursor-pointer items-center gap-x-2 rounded-md py-2 pl-2 text-sm font-medium leading-5 text-gray-500 transition duration-150 ease-in-out hover:scale-105 hover:bg-[#1D70B6] hover:fill-current hover:text-gray-200 focus:outline-none"
+                className={`${
+                  item.name === 'Sair'
+                    ? 'bg-red-400/90 text-white hover:bg-red-400 hover:text-white'
+                    : ''
+                } group flex transform cursor-pointer items-center gap-x-2 rounded-md py-2 pl-2 text-sm font-medium leading-5 text-gray-500 transition duration-150 ease-in-out hover:scale-105 hover:bg-[#1D70B6] hover:fill-current hover:text-gray-200 focus:outline-none`}
               >
                 <item.icon
                   className={`${!open ? 'w-screen' : ''}`}
@@ -94,12 +99,6 @@ export default function Sidebar() {
             </li>
           ))}
         </ul>
-        <button
-          className="group flex transform cursor-pointer items-center gap-x-2 rounded-md py-2 pl-2 text-sm font-medium leading-5 text-gray-500 transition duration-150 ease-in-out hover:scale-105 hover:bg-[#1D70B6] hover:fill-current hover:text-gray-200 focus:outline-none"
-          onClick={() => signOut()}
-        >
-          <SignOut size={24} />
-        </button>
       </aside>
     </div>
   )
