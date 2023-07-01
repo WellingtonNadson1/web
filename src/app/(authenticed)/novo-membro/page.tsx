@@ -46,7 +46,15 @@ export default function NovoMembro() {
     },
   })
   const { register, handleSubmit } = useForm<Inputs>()
-  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data)
+  const onSubmit: SubmitHandler<Inputs> = (data) => {
+    fetch('http://localhost:3333/users', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    })
+  }
   return (
     <div className="relative mx-auto w-full px-2 py-2">
       <Header session={session} titlePage="Novo Membro" />
@@ -245,6 +253,7 @@ export default function NovoMembro() {
                     </label>
                     <div className="mt-2">
                       <input
+                        {...register('profissao')}
                         id="profissao"
                         name="profissao"
                         type="text"
@@ -727,7 +736,7 @@ export default function NovoMembro() {
                     </label>
                     <div className="mt-2">
                       <input
-                        {...register('numberHouse')}
+                        {...register('estado')}
                         type="text"
                         name="numberHouse"
                         id="numberHouse"
