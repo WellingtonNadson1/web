@@ -1,6 +1,7 @@
 'use client'
 import { UserFocus } from '@phosphor-icons/react'
-import { useEffect, useState } from 'react'
+import useSWR from 'swr'
+// import { useEffect, useState } from 'react'
 
 interface SitacaoNoReino {
   id: String
@@ -112,21 +113,24 @@ export default function ControlePresenca() {
   //     tipo: 'Membro',
   //   },
   // ]
-  const [users, setUsers] = useState<User[]>([])
+  // const [users, setUsers] = useState<User[]>([])
 
-  useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        const response = await fetch('http://localhost:3333/users')
-        const data = await response.json()
-        setUsers(data)
-        console.log('AQUI', data)
-      } catch (error) {
-        console.error('Deu erro na requisição: ', error)
-      }
-    }
-    fetchUsers()
-  }, [])
+  // useEffect(() => {
+  //   const fetchUsers = async () => {
+  //     try {
+  //       const response = await fetch('http://localhost:3333/users')
+  //       const data: User[] = await response.json()
+  //       setUsers(data)
+  //       console.log('AQUI', data)
+  //     } catch (error) {
+  //       console.error('Deu erro na requisição: ', error)
+  //     }
+  //   }
+  //   fetchUsers()
+  // }, [])
+  const fetcher = (url: string) => fetch(url).then((res) => res.json())
+  const URL = 'http://localhost:3333/users'
+  const { data: users, isLoading } = useSWR<User[]>(URL, fetcher)
 
   return (
     <>
@@ -157,8 +161,8 @@ export default function ControlePresenca() {
                 </tr>
               </thead>
               <tbody className="text-sm font-normal text-gray-700">
-                {users.length > 0 ? (
-                  users.map((user) => (
+                {!isLoading ? (
+                  users?.map((user) => (
                     <tr
                       className="border-b border-gray-200 py-8 hover:bg-gray-100/90"
                       key={user.id}

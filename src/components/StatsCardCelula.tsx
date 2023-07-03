@@ -1,7 +1,7 @@
 import { UsersFour } from '@phosphor-icons/react'
 import Link from 'next/link'
 
-export default function StatsCardSupervision() {
+export default function StatsCardCelula() {
   const supervisoesIbb = [
     {
       title: 'Vermelha',
@@ -75,7 +75,7 @@ export default function StatsCardSupervision() {
                 </div>
                 <div className="flex items-center">
                   <span className="text-sm font-bold leading-normal text-emerald-500">
-                    {stat.porcentagem}
+                    {/* {stat.porcentagem} */}
                   </span>
                   <span className="ml-2 text-sm font-bold leading-normal text-gray-500">
                     {stat.nivel}

@@ -2,7 +2,9 @@
 import Header from '@/components/Header'
 import { useSession } from 'next-auth/react'
 import { redirect } from 'next/navigation'
+import React, { useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
+import useSWR from 'swr'
 
 interface Inputs {
   firstName: string
@@ -38,6 +40,17 @@ interface Inputs {
   numberHouse: string
 }
 
+interface Celula {
+  id: string
+  nome: string
+}
+
+export interface SupervisaoData {
+  id: string
+  nome: string
+  celulas: Celula[]
+}
+
 export default function NovoMembro() {
   const { data: session } = useSession({
     required: true,
@@ -55,6 +68,26 @@ export default function NovoMembro() {
       body: JSON.stringify(data),
     })
   }
+
+  const fetcher = (url: string) => fetch(url).then((res) => res.json())
+  const URL = 'http://localhost:3333/supervisoes'
+  const { data: supervisoes, isLoading } = useSWR<SupervisaoData[]>(
+    URL,
+    fetcher,
+  )
+
+  const [supervisaoSelecionada, setSupervisaoSelecionada] = useState<string>()
+
+  const handleSupervisaoSelecionada = (
+    event: React.ChangeEvent<HTMLSelectElement>,
+  ) => {
+    setSupervisaoSelecionada(event.target.value)
+  }
+
+  const celulasFiltradas = supervisoes?.find(
+    (supervisao) => supervisao.id === supervisaoSelecionada,
+  )?.celulas
+
   return (
     <div className="relative mx-auto w-full px-2 py-2">
       <Header session={session} titlePage="Novo Membro" />
@@ -361,12 +394,14 @@ export default function NovoMembro() {
                         id="supervisao"
                         name="supervisao"
                         className="block w-full rounded-md border-0 py-1.5 text-slate-700 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
+                        onChange={handleSupervisaoSelecionada}
                       >
-                        <option value={'Vermelha'}>Vermelha</option>
-                        <option value={'Azul'}>Azul</option>
-                        <option value={'Verde'}>Verde</option>
-                        <option value={'Amarela'}>Amarela</option>
-                        <option value={'Laranja'}>Laranja</option>
+                        {!isLoading &&
+                          supervisoes?.map((supervisao) => (
+                            <option key={supervisao.id} value={supervisao.id}>
+                              {supervisao.nome}
+                            </option>
+                          ))}
                       </select>
                     </div>
                   </div>
@@ -385,12 +420,12 @@ export default function NovoMembro() {
                         name="celula"
                         className="block w-full rounded-md border-0 py-1.5 text-slate-700 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
                       >
-                        <option value={'Betel'}>Betel</option>
-                        <option value={'Kadosh'}>Kadosh</option>
-                        <option value={'Rute'}>Rute</option>
-                        <option value={'Confins da Terra'}>
-                          Confins da Terra
-                        </option>
+                        {!isLoading &&
+                          celulasFiltradas?.map((celula) => (
+                            <option key={celula.id} value={'Betel'}>
+                              {celula.nome}
+                            </option>
+                          ))}
                       </select>
                     </div>
                   </div>

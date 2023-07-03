@@ -1,63 +1,19 @@
 import Link from 'next/link'
 
-export default function ListCelulas() {
-  const celulas = [
-    {
-      id: 1,
-      nomeCelula: 'Betel',
-      lideres: 'Wellington e Rafaelly',
-    },
-    {
-      id: 2,
-      nomeCelula: 'Casa de Deus',
-      lideres: 'Chrystiano e Joseilma',
-    },
-    {
-      id: 3,
-      nomeCelula: 'Confins da Terra',
-      lideres: 'Cleudilene',
-    },
-    {
-      id: 4,
-      nomeCelula: 'Herdeiros de Deus',
-      lideres: 'Ariadina',
-    },
-    {
-      id: 5,
-      nomeCelula: 'Lugar de Deus',
-      lideres: 'Denise',
-    },
-    {
-      id: 6,
-      nomeCelula: 'Luz do Mundo',
-      lideres: 'Viviane',
-    },
-    {
-      id: 7,
-      nomeCelula: 'Reconcililando Vidas',
-      lideres: 'Victor e Patricia',
-    },
-    {
-      id: 8,
-      nomeCelula: 'Kadosh',
-      lideres: 'Antônio e Rose',
-    },
-    {
-      id: 9,
-      nomeCelula: 'Semeando Vidas',
-      lideres: 'Raimundo e Marylex',
-    },
-    {
-      id: 10,
-      nomeCelula: 'Resgatando Vidas',
-      lideres: 'Flávio',
-    },
-    {
-      id: 11,
-      nomeCelula: 'Resgatando',
-      lideres: 'Daniel e Jeycilene',
-    },
-  ]
+export interface Icelulas {
+  id: string
+  nome: string
+  lider: {
+    id: string
+    firstName: string
+  }
+}
+
+interface ListCelulasProps {
+  data: Icelulas[]
+}
+
+export default function ListCelulas({ data }: ListCelulasProps) {
   return (
     <div>
       <div className="relative mx-auto mt-3 w-full p-2">
@@ -76,7 +32,7 @@ export default function ListCelulas() {
                   </tr>
                 </thead>
                 <tbody className="px-4">
-                  {celulas.map((celula, index) => (
+                  {data.map((celula, index) => (
                     <tr
                       className="rounded-lg hover:bg-gray-100/90"
                       key={celula.id}
@@ -85,11 +41,11 @@ export default function ListCelulas() {
                         <h2 className="pl-2">{index + 1}</h2>
                       </td>
                       <td>
-                        <h2 className="pl-2">{celula.nomeCelula}</h2>
+                        <h2 className="pl-2">{celula.nome}</h2>
                       </td>
 
                       <td className="mt-2 hidden text-start text-gray-700 sm:block">
-                        {celula.lideres}
+                        {celula.lider.firstName}
                       </td>
                       <td className="p-2">
                         <div>
