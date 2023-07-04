@@ -1,6 +1,8 @@
-import Link from 'next/link'
+import { ParamsSupervisaoIdContext } from '@/app/(authenticed)/supervisoes/[supervisaoId]/page'
+import { useRouter } from 'next/navigation'
+import React, { useContext } from 'react'
 
-export interface Icelulas {
+export interface ICelula {
   id: string
   nome: string
   lider: {
@@ -10,10 +12,17 @@ export interface Icelulas {
 }
 
 interface ListCelulasProps {
-  data: Icelulas[]
+  data: ICelula[]
 }
 
 export default function ListCelulas({ data }: ListCelulasProps) {
+  const router = useRouter()
+  const contextParamsSupervisaoId = useContext(ParamsSupervisaoIdContext)
+
+  const handleClickCelula = (event: React.MouseEvent<HTMLElement>) => {
+    const idCelula = event.currentTarget.id
+    router.push(`/supervisoes/${contextParamsSupervisaoId}/celulas/${idCelula}`)
+  }
   return (
     <div>
       <div className="relative mx-auto mt-3 w-full p-2">
@@ -32,11 +41,8 @@ export default function ListCelulas({ data }: ListCelulasProps) {
                   </tr>
                 </thead>
                 <tbody className="px-4">
-                  {data.map((celula, index) => (
-                    <tr
-                      className="rounded-lg hover:bg-gray-100/90"
-                      key={celula.id}
-                    >
+                  {data?.map((celula, index) => (
+                    <tr className="rounded-lg hover:bg-gray-100/90" key={index}>
                       <td>
                         <h2 className="pl-2">{index + 1}</h2>
                       </td>
@@ -45,16 +51,17 @@ export default function ListCelulas({ data }: ListCelulasProps) {
                       </td>
 
                       <td className="mt-2 hidden text-start text-gray-700 sm:block">
-                        {celula.lider.firstName}
+                        {celula.lider?.firstName}
                       </td>
                       <td className="p-2">
                         <div>
-                          <Link
+                          <button
+                            onClick={handleClickCelula}
+                            id={celula.id}
                             className="block rounded-md bg-green-500 px-4 py-2 text-center text-sm font-medium leading-3 text-white shadow-sm ring-1 ring-slate-700/10 duration-150 hover:bg-green-600"
-                            href="/supervisoes/celulas/controle-celula"
                           >
-                            Lançar
-                          </Link>
+                            Acessar
+                          </button>
                         </div>
                       </td>
                     </tr>

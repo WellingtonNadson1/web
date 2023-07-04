@@ -13,7 +13,7 @@ export default function StatsCardSupervision({ supervisao }: ISupervisaoProps) {
       <div className="relative z-10 mx-auto w-full py-2">
         <div className="relative z-10 mx-auto mt-3 grid w-full grid-cols-1 flex-wrap items-center justify-between gap-4 p-2 sm:grid-cols-2 md:flex-nowrap">
           <div
-            className={`flex-warp relative w-full cursor-pointer flex-col rounded-lg bg-white p-4 shadow-md hover:bg-white/95`}
+            className={`flex-warp relative w-full flex-col rounded-lg bg-white p-4 shadow-md hover:bg-white/95`}
           >
             <div className="flex w-full items-center justify-between">
               <div className="mb-0 font-sans text-sm font-semibold uppercase leading-normal">
