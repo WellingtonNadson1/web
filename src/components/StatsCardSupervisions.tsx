@@ -1,7 +1,7 @@
 'use client'
 import { ISupervisaoData } from '@/app/(authenticed)/supervisoes/[supervisaoId]/page'
 import { UsersFour } from '@phosphor-icons/react'
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/navigation'
 import React from 'react'
 
 interface SupervisoesProps {
@@ -13,8 +13,10 @@ export default function StatsCardSupervisions({
 }: SupervisoesProps) {
   const router = useRouter()
 
-  const handleSupervisaoSelecionada = (event: React.MouseEvent) => {
-    const id = (event.target as HTMLElement).id
+  const handleSupervisaoSelecionada = (
+    event: React.MouseEvent<HTMLElement>,
+  ) => {
+    const id = event.currentTarget.id
     console.log('Esta aqui o ID', id)
     router.push(`/supervisoes/${id}`)
   }
