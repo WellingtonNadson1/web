@@ -4,7 +4,6 @@ import { ICelula } from '@/components/ListCelulas'
 import StatsCardSupervision from '@/components/StatsCardSupervision'
 import { useSession } from 'next-auth/react'
 import { redirect } from 'next/navigation'
-import { createContext } from 'react'
 import useSWR from 'swr'
 
 interface IUser {
@@ -27,8 +26,6 @@ export interface ISupervisaoData {
   celulas: ICelula[]
 }
 
-export const ParamsSupervisaoIdContext = createContext('')
-
 export default function Supervisao({
   params: { supervisaoId },
 }: {
@@ -49,16 +46,14 @@ export default function Supervisao({
   if (!supervisao) return <div>loading...</div>
 
   return (
-    <ParamsSupervisaoIdContext.Provider value={supervisaoId}>
-      <div className="mx-auto w-full px-2 py-2">
-        <div className="mx-auto w-full">
-          <Header
-            session={session}
-            titlePage={`${!error}` && `Supervisão ${supervisao.nome}`}
-          />
-        </div>
-        <StatsCardSupervision supervisao={supervisao} />
+    <div className="mx-auto w-full px-2 py-2">
+      <div className="mx-auto w-full">
+        <Header
+          session={session}
+          titlePage={`${!error}` && `Supervisão ${supervisao.nome}`}
+        />
       </div>
-    </ParamsSupervisaoIdContext.Provider>
+      <StatsCardSupervision supervisao={supervisao} />
+    </div>
   )
 }
