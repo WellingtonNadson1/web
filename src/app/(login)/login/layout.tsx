@@ -13,8 +13,10 @@ export default async function LoginLayout({
   children: React.ReactNode
 }) {
   return (
-    <>
-      <NextAuthProvider>{children}</NextAuthProvider>
-    </>
+    <html lang="pt">
+      <body>
+        <NextAuthProvider>{children}</NextAuthProvider>
+      </body>
+    </html>
   )
 }

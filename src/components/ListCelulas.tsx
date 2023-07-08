@@ -1,63 +1,28 @@
-import Link from 'next/link'
+import { ParamsSupervisaoIdContext } from '@/app/(authenticed)/supervisoes/[supervisaoId]/page'
+import { useRouter } from 'next/navigation'
+import React, { useContext } from 'react'
 
-export default function ListCelulas() {
-  const celulas = [
-    {
-      id: 1,
-      nomeCelula: 'Betel',
-      lideres: 'Wellington e Rafaelly',
-    },
-    {
-      id: 2,
-      nomeCelula: 'Casa de Deus',
-      lideres: 'Chrystiano e Joseilma',
-    },
-    {
-      id: 3,
-      nomeCelula: 'Confins da Terra',
-      lideres: 'Cleudilene',
-    },
-    {
-      id: 4,
-      nomeCelula: 'Herdeiros de Deus',
-      lideres: 'Ariadina',
-    },
-    {
-      id: 5,
-      nomeCelula: 'Lugar de Deus',
-      lideres: 'Denise',
-    },
-    {
-      id: 6,
-      nomeCelula: 'Luz do Mundo',
-      lideres: 'Viviane',
-    },
-    {
-      id: 7,
-      nomeCelula: 'Reconcililando Vidas',
-      lideres: 'Victor e Patricia',
-    },
-    {
-      id: 8,
-      nomeCelula: 'Kadosh',
-      lideres: 'Antônio e Rose',
-    },
-    {
-      id: 9,
-      nomeCelula: 'Semeando Vidas',
-      lideres: 'Raimundo e Marylex',
-    },
-    {
-      id: 10,
-      nomeCelula: 'Resgatando Vidas',
-      lideres: 'Flávio',
-    },
-    {
-      id: 11,
-      nomeCelula: 'Resgatando',
-      lideres: 'Daniel e Jeycilene',
-    },
-  ]
+export interface ICelula {
+  id: string
+  nome: string
+  lider: {
+    id: string
+    firstName: string
+  }
+}
+
+interface ListCelulasProps {
+  data: ICelula[]
+}
+
+export default function ListCelulas({ data }: ListCelulasProps) {
+  const router = useRouter()
+  const contextParamsSupervisaoId = useContext(ParamsSupervisaoIdContext)
+
+  const handleClickCelula = (event: React.MouseEvent<HTMLElement>) => {
+    const idCelula = event.currentTarget.id
+    router.push(`/supervisoes/${contextParamsSupervisaoId}/celulas/${idCelula}`)
+  }
   return (
     <div>
       <div className="relative mx-auto mt-3 w-full p-2">
@@ -76,29 +41,27 @@ export default function ListCelulas() {
                   </tr>
                 </thead>
                 <tbody className="px-4">
-                  {celulas.map((celula, index) => (
-                    <tr
-                      className="rounded-lg hover:bg-gray-100/90"
-                      key={celula.id}
-                    >
+                  {data?.map((celula, index) => (
+                    <tr className="rounded-lg hover:bg-gray-100/90" key={index}>
                       <td>
                         <h2 className="pl-2">{index + 1}</h2>
                       </td>
                       <td>
-                        <h2 className="pl-2">{celula.nomeCelula}</h2>
+                        <h2 className="pl-2">{celula.nome}</h2>
                       </td>
 
                       <td className="mt-2 hidden text-start text-gray-700 sm:block">
-                        {celula.lideres}
+                        {celula.lider?.firstName}
                       </td>
                       <td className="p-2">
                         <div>
-                          <Link
+                          <button
+                            onClick={handleClickCelula}
+                            id={celula.id}
                             className="block rounded-md bg-green-500 px-4 py-2 text-center text-sm font-medium leading-3 text-white shadow-sm ring-1 ring-slate-700/10 duration-150 hover:bg-green-600"
-                            href="/supervisoes/celulas/controle-celula"
                           >
-                            Lançar
-                          </Link>
+                            Acessar
+                          </button>
                         </div>
                       </td>
                     </tr>

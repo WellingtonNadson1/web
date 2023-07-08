@@ -5,6 +5,7 @@ export default function LicoesCelula() {
   const temaMesCelula = 'Aliança'
   const statusLicoes = [
     {
+      id: 1,
       title: 'A Colheita da Aliança',
       periodo: '11 a 17 de Jun/2023',
       status: 'ok',
@@ -12,6 +13,7 @@ export default function LicoesCelula() {
       versiculo: '1Re 11:9-13',
     },
     {
+      id: 2,
       title: 'Deus de Aliança',
       periodo: '04 a 10 de Jun/2023',
       status: 'ok',
@@ -19,6 +21,7 @@ export default function LicoesCelula() {
       versiculo: '1Re 11:9-13',
     },
     {
+      id: 3,
       title: 'A Colheita da Aliança',
       periodo: '11 a 17 de Jun/2023',
       status: 'pendente',
@@ -26,6 +29,7 @@ export default function LicoesCelula() {
       versiculo: '1Re 11:9-13',
     },
     {
+      id: 4,
       title: 'Nova Aliança',
       periodo: '25 de Jun a 1º de Jul/2023',
       status: 'pendente',
@@ -44,7 +48,7 @@ export default function LicoesCelula() {
         <div className="mb-3 grid cursor-pointer grid-cols-1 gap-4 px-2 py-1 sm:grid-cols-2">
           {statusLicoes.map((stat) => (
             <div
-              key={stat.title}
+              key={stat.id}
               className="rounded-md bg-gray-50 hover:bg-gray-100/80"
             >
               <div className="p-2 sm:col-span-1">

@@ -3,20 +3,36 @@ import Calendar from '@/components/Calendar'
 import ControlePresenca from '@/components/ControlePresenca'
 import Header from '@/components/Header'
 import LicoesCelula from '@/components/LicoesCelula'
+import { ICelula } from '@/components/ListCelulas'
 import { useSession } from 'next-auth/react'
-import { redirect } from 'next/navigation'
+import { redirect, useParams } from 'next/navigation'
+import useSWR from 'swr'
 
-export default function ControleCelula() {
+export default function ControleCelulaSupervision({
+  params: { celulaId },
+}: {
+  params: { celulaId: string }
+}) {
   const { data: session } = useSession({
     required: true,
     onUnauthenticated() {
       redirect('/login?callbackUrl=/dashboard')
     },
   })
+
+  console.log(useParams())
+  const fetcher = (url: string) => fetch(url).then((res) => res.json())
+  const URL = `http://localhost:3333/celulas/${celulaId}`
+  const { data, error } = useSWR<ICelula>(URL, fetcher)
+  console.log('dataCelula', data)
+  if (error) {
+    return <div>Erro na requisiçãoo</div>
+  }
+
   return (
     <div className="relative mx-auto w-full px-2 py-2">
       <div className="relative mx-auto w-full">
-        <Header session={session} titlePage="Cont. de Célula" />
+        <Header session={session} titlePage={`Célula ${data?.nome}`} />
       </div>
       <div className="relative mx-auto mb-4 mt-3 w-full px-2">
         <Calendar />

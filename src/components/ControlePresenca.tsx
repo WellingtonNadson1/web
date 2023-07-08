@@ -1,72 +1,137 @@
 'use client'
-import Image from 'next/image'
+import { UserFocus } from '@phosphor-icons/react'
+import useSWR from 'swr'
+// import { useEffect, useState } from 'react'
+
+interface SitacaoNoReino {
+  id: String
+  nome: String
+}
+
+interface CargoDeLideranca {
+  id: String
+  nome: String
+}
+
+interface User {
+  id: string
+  email: string
+  firstName: string
+  lastName: string
+  cpf: string
+  dateNasc: string | Date
+  sexo: string
+  telefone: string
+  escolaridade: string
+  profissao: string
+  batizado: string
+  dateBatizado: string | Date
+  isDiscipulado: string
+  discipulador: string
+  supervisao: string
+  celula: string | undefined
+  escolaPrincipios: string | undefined
+  escolaFundamentos: string | undefined
+  escolaDisicipulos: string | undefined
+  escolaOracao: string | undefined
+  encontroComDeus: string | undefined
+  encontroDD: string | undefined
+  estadoCivil: string
+  nomeConjuge: string
+  dateCasamento: string | Date
+  hasFilho: string
+  quantidadeFilho: number
+  endereco_id: string | undefined
+  dateDecisao: string | Date
+  situacao_no_reino: SitacaoNoReino
+  cargo_de_lideranca: CargoDeLideranca
+}
 
 export default function ControlePresenca() {
-  const membrosCelula = [
-    {
-      id: 1,
-      imagePerfil: '/images/man3.jpg',
-      nomeMembroCelula: 'Wellington',
-      status: 'Líder',
-      tipo: 'Membro',
-    },
-    {
-      id: 2,
-      imagePerfil: '/images/woman2.png',
-      nomeMembroCelula: 'Rafaelly',
-      status: 'Líder',
-      tipo: 'Membro',
-    },
-    {
-      id: 3,
-      imagePerfil: '/images/man6.png',
-      nomeMembroCelula: 'Rocha',
-      status: 'Ativo',
-      tipo: 'Membro',
-    },
-    {
-      id: 4,
-      imagePerfil: '/images/woman1.avif',
-      nomeMembroCelula: 'Carmem',
-      status: 'Ativo',
-      tipo: 'Membro',
-    },
-    {
-      id: 5,
-      imagePerfil: '/images/man4.png',
-      nomeMembroCelula: 'Washington',
-      status: 'Ativo',
-      tipo: 'Membro',
-    },
-    {
-      id: 6,
-      imagePerfil: '/images/woman3.png',
-      nomeMembroCelula: 'Socorro',
-      status: 'Ativo',
-      tipo: 'Membro',
-    },
-    {
-      id: 7,
-      imagePerfil: '/images/man1.avif',
-      nomeMembroCelula: 'Willian',
-      status: 'Ativo',
-      tipo: 'Membro',
-    },
-    {
-      id: 8,
-      imagePerfil: '/images/man5.png',
-      nomeMembroCelula: 'Magno',
-      status: 'Normal',
-      tipo: 'Membro',
-    },
-    {
-      id: 9,
-      imagePerfil: '/images/woman4.png',
-      nomeMembroCelula: 'Karol',
-      status: 'Normal',
-      tipo: 'Membro',
-    },
-  ]
+  // const membrosCelula = [
+  //   {
+  //     id: 1,
+  //     imagePerfil: '/images/man3.jpg',
+  //     nomeMembroCelula: 'Wellington',
+  //     status: 'Líder',
+  //     tipo: 'Membro',
+  //   },
+  //   {
+  //     id: 2,
+  //     imagePerfil: '/images/woman2.png',
+  //     nomeMembroCelula: 'Rafaelly',
+  //     status: 'Líder',
+  //     tipo: 'Membro',
+  //   },
+  //   {
+  //     id: 3,
+  //     imagePerfil: '/images/man6.png',
+  //     nomeMembroCelula: 'Rocha',
+  //     status: 'Ativo',
+  //     tipo: 'Membro',
+  //   },
+  //   {
+  //     id: 4,
+  //     imagePerfil: '/images/woman1.avif',
+  //     nomeMembroCelula: 'Carmem',
+  //     status: 'Ativo',
+  //     tipo: 'Membro',
+  //   },
+  //   {
+  //     id: 5,
+  //     imagePerfil: '/images/man4.png',
+  //     nomeMembroCelula: 'Washington',
+  //     status: 'Ativo',
+  //     tipo: 'Membro',
+  //   },
+  //   {
+  //     id: 6,
+  //     imagePerfil: '/images/woman3.png',
+  //     nomeMembroCelula: 'Socorro',
+  //     status: 'Ativo',
+  //     tipo: 'Membro',
+  //   },
+  //   {
+  //     id: 7,
+  //     imagePerfil: '/images/man1.avif',
+  //     nomeMembroCelula: 'Willian',
+  //     status: 'Ativo',
+  //     tipo: 'Membro',
+  //   },
+  //   {
+  //     id: 8,
+  //     imagePerfil: '/images/man5.png',
+  //     nomeMembroCelula: 'Magno',
+  //     status: 'Normal',
+  //     tipo: 'Membro',
+  //   },
+  //   {
+  //     id: 9,
+  //     imagePerfil: '/images/woman4.png',
+  //     nomeMembroCelula: 'Karol',
+  //     status: 'Normal',
+  //     tipo: 'Membro',
+  //   },
+  // ]
+  // const [users, setUsers] = useState<User[]>([])
+
+  // useEffect(() => {
+  //   const fetchUsers = async () => {
+  //     try {
+  //       const response = await fetch('http://localhost:3333/users')
+  //       const data: User[] = await response.json()
+  //       setUsers(data)
+  //       console.log('AQUI', data)
+  //     } catch (error) {
+  //       console.error('Deu erro na requisição: ', error)
+  //     }
+  //   }
+  //   fetchUsers()
+  // }, [])
+  const fetcher = (url: string) => fetch(url).then((res) => res.json())
+  const URL = 'http://localhost:3333/users'
+  const { data: users, isLoading } = useSWR<User[]>(URL, fetcher)
+
   return (
     <>
       <div className="relative mx-auto w-full rounded-xl bg-white px-4 py-2 shadow-lg">
@@ -96,58 +161,64 @@ export default function ControlePresenca() {
                 </tr>
               </thead>
               <tbody className="text-sm font-normal text-gray-700">
-                {membrosCelula.map((membro) => (
-                  <tr
-                    className="border-b border-gray-200 py-8 hover:bg-gray-100/90"
-                    key={membro.id}
-                  >
-                    <td>
-                      <div className="flex items-center justify-start gap-3">
-                        <Image
-                          src={membro.imagePerfil}
-                          width={40}
-                          height={40}
-                          alt={membro.nomeMembroCelula}
-                          className={`cursor-pointer rounded-full shadow`}
-                        />
-                        <h2 className="ml-4">{membro.nomeMembroCelula}</h2>
-                      </div>
-                    </td>
-                    <td className="text-center">
-                      <span
-                        className={`w-full rounded-md px-2 py-1 text-center ${
-                          membro.status === 'Ativo'
-                            ? 'border border-green-200 bg-green-100 ring-green-500'
-                            : membro.status === 'Líder'
-                            ? 'border border-blue-200 bg-blue-100 ring-blue-500'
-                            : 'border border-orange-200 bg-orange-100 ring-orange-500'
-                        }`}
-                      >
-                        {membro.status}
-                      </span>
-                    </td>
-                    <td className="mt-2 hidden text-center sm:block">
-                      {membro.tipo}
-                    </td>
+                {!isLoading ? (
+                  users?.map((user) => (
+                    <tr
+                      className="border-b border-gray-200 py-8 hover:bg-gray-100/90"
+                      key={user.id}
+                    >
+                      <td>
+                        <div className="flex items-center justify-start gap-3">
+                          <UserFocus size={24} />
+                          <h2 className="ml-4">{user.firstName}</h2>
+                        </div>
+                      </td>
+                      <td className="text-center">
+                        <span
+                          className={`inline w-full rounded-md px-2 py-1 text-center ${
+                            user.situacao_no_reino?.nome === 'Ativo'
+                              ? 'border border-green-200 bg-green-100 ring-green-500'
+                              : user.situacao_no_reino?.nome === 'Normal'
+                              ? 'border border-blue-200 bg-blue-100 ring-blue-500'
+                              : user.situacao_no_reino?.nome === 'Frio'
+                              ? 'border border-orange-200 bg-orange-100 ring-orange-500'
+                              : 'border border-red-200 bg-red-100 ring-red-500'
+                          }`}
+                        >
+                          {user.situacao_no_reino?.nome}
+                        </span>
+                      </td>
+                      <td className="text-center">
+                        <span className="hidden w-full rounded-md border border-gray-200 bg-gray-50 px-2 py-1 text-center ring-gray-500 sm:inline">
+                          {user.cargo_de_lideranca?.nome}
+                        </span>
+                      </td>
 
-                    <td className="mr-1 text-center">
-                      <input
-                        id="presente"
-                        name={`presenca-${membro.id}`}
-                        type="radio"
-                        className="h-4 w-4 cursor-pointer border-green-300 text-green-600 focus:ring-green-600"
-                      />
-                    </td>
-                    <td className="ml-1 text-center">
-                      <input
-                        id="faltou"
-                        name={`presenca-${membro.id}`}
-                        type="radio"
-                        className="h-4 w-4 cursor-pointer border-red-300 text-red-600 focus:ring-red-600"
-                      />
+                      <td className="mr-1 text-center">
+                        <input
+                          id="presente"
+                          name={`presenca-${user.firstName}`}
+                          type="radio"
+                          className="h-4 w-4 cursor-pointer border-green-300 text-green-600 focus:ring-green-600"
+                        />
+                      </td>
+                      <td className="ml-1 text-center">
+                        <input
+                          id="faltou"
+                          name={`presenca-${user.firstName}`}
+                          type="radio"
+                          className="h-4 w-4 cursor-pointer border-red-300 text-red-600 focus:ring-red-600"
+                        />
+                      </td>
+                    </tr>
+                  ))
+                ) : (
+                  <tr>
+                    <td>
+                      <p>Carregando...</p>
                     </td>
                   </tr>
-                ))}
+                )}
               </tbody>
             </table>
             <button
