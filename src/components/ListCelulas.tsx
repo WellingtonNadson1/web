@@ -1,4 +1,4 @@
-import { ParamsSupervisaoIdContext } from '@/app/(authenticed)/supervisoes/[supervisaoId]/page'
+import { ParamsSupervisaoIdContext } from '@/contexts/contextParamsSupervisao'
 import { useRouter } from 'next/navigation'
 import React, { useContext } from 'react'
 
