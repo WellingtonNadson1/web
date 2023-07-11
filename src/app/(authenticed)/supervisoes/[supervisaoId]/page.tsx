@@ -2,9 +2,9 @@
 import Header from '@/components/Header'
 import { ICelula } from '@/components/ListCelulas'
 import StatsCardSupervision from '@/components/StatsCardSupervision'
+import { ParamsSupervisaoIdContext } from '@/contexts/contextParamsSupervisao'
 import { useSession } from 'next-auth/react'
 import { redirect } from 'next/navigation'
-import { createContext } from 'react'
 import useSWR from 'swr'
 
 interface IUser {
@@ -26,8 +26,6 @@ export interface ISupervisaoData {
   User: IUser[]
   celulas: ICelula[]
 }
-
-export const ParamsSupervisaoIdContext = createContext('')
 
 export default function Supervisao({
   params: { supervisaoId },
