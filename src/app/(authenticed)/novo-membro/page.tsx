@@ -60,7 +60,9 @@ export default function NovoMembro() {
   })
   const { register, handleSubmit } = useForm<Inputs>()
   const onSubmit: SubmitHandler<Inputs> = (data) => {
-    fetch('http://localhost:3333/users', {
+    const hostname = 'server-lac-nine.vercel.app'
+    const URL = `http://${hostname}/users`
+    fetch(URL, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -70,7 +72,8 @@ export default function NovoMembro() {
   }
 
   const fetcher = (url: string) => fetch(url).then((res) => res.json())
-  const URL = 'http://localhost:3333/supervisoes'
+  const hostname = 'server-lac-nine.vercel.app'
+  const URL = `http://${hostname}/supervisoes`
   const { data: supervisoes, isLoading } = useSWR<SupervisaoData[]>(
     URL,
     fetcher,

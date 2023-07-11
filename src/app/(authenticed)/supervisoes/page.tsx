@@ -15,7 +15,8 @@ export default function Supervisoes() {
   })
 
   const fetcher = (url: string) => fetch(url).then((res) => res.json())
-  const URL = 'http://localhost:3333/supervisoes'
+  const hostname = 'server-lac-nine.vercel.app'
+  const URL = `http://${hostname}/supervisoes`
   const { data: supervisoes, error } = useSWR<ISupervisaoData[]>(URL, fetcher)
   console.log(supervisoes)
   if (error) return <div>failed to load</div>

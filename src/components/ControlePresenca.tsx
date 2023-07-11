@@ -129,7 +129,8 @@ export default function ControlePresenca() {
   //   fetchUsers()
   // }, [])
   const fetcher = (url: string) => fetch(url).then((res) => res.json())
-  const URL = 'http://localhost:3333/users'
+  const hostname = 'server-lac-nine.vercel.app'
+  const URL = `http://${hostname}/users`
   const { data: users, isLoading } = useSWR<User[]>(URL, fetcher)
 
   return (

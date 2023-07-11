@@ -22,7 +22,8 @@ export default function ControleCelulaSupervision({
 
   console.log(useParams())
   const fetcher = (url: string) => fetch(url).then((res) => res.json())
-  const URL = `http://localhost:3333/celulas/${celulaId}`
+  const hostname = 'server-lac-nine.vercel.app'
+  const URL = `http://${hostname}/celulas/${celulaId}`
   const { data, error } = useSWR<ICelula>(URL, fetcher)
   console.log('dataCelula', data)
   if (error) {
