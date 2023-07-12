@@ -1,8 +1,8 @@
 'use client'
+import { Providers } from '@/Providers/supervisao'
 import Header from '@/components/Header'
 import { ICelula } from '@/components/ListCelulas'
 import StatsCardSupervision from '@/components/StatsCardSupervision'
-import { ParamsSupervisaoIdContext } from '@/contexts/contextParamsSupervisao'
 import { useSession } from 'next-auth/react'
 import { redirect } from 'next/navigation'
 import useSWR from 'swr'
@@ -48,7 +48,7 @@ export default function Supervisao({
   if (!supervisao) return <div>loading...</div>
 
   return (
-    <ParamsSupervisaoIdContext.Provider value={supervisaoId}>
+    <Providers>
       <div className="mx-auto w-full px-2 py-2">
         <div className="mx-auto w-full">
           <Header
@@ -58,6 +58,6 @@ export default function Supervisao({
         </div>
         <StatsCardSupervision supervisao={supervisao} />
       </div>
-    </ParamsSupervisaoIdContext.Provider>
+    </Providers>
   )
 }

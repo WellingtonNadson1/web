@@ -1,6 +1,6 @@
-import { ParamsSupervisaoIdContext } from '@/contexts/contextParamsSupervisao'
+import { useSupervisaoContext } from '@/contexts/supervisao'
 import { useRouter } from 'next/navigation'
-import React, { useContext } from 'react'
+import React from 'react'
 
 export interface ICelula {
   id: string
@@ -17,7 +17,7 @@ interface ListCelulasProps {
 
 export default function ListCelulas({ data }: ListCelulasProps) {
   const router = useRouter()
-  const contextParamsSupervisaoId = useContext(ParamsSupervisaoIdContext)
+  const contextParamsSupervisaoId = useSupervisaoContext()
 
   const handleClickCelula = (event: React.MouseEvent<HTMLElement>) => {
     const idCelula = event.currentTarget.id

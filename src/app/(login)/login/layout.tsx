@@ -1,4 +1,4 @@
-import { NextAuthProvider } from '@/app/Provider'
+import { Providers } from '@/Providers/supervisao'
 import React from 'react'
 import '../globals.css'
 
@@ -15,7 +15,7 @@ export default async function LoginLayout({
   return (
     <html lang="pt">
       <body>
-        <NextAuthProvider>{children}</NextAuthProvider>
+        <Providers>{children}</Providers>
       </body>
     </html>
   )
