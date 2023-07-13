@@ -17,7 +17,7 @@ export default function StatsCardSupervisions({
     event: React.MouseEvent<HTMLElement>,
   ) => {
     const id = event.currentTarget.id
-    console.log('Esta aqui o ID', id)
+    console.log('Esta aqui o ID clicado', id)
     router.push(`/supervisoes/${id}`)
   }
 

@@ -1,19 +1,11 @@
 'use client'
 import Header from '@/components/Header'
 import StatsCardSupervisions from '@/components/StatsCardSupervisions'
-import { useSession } from 'next-auth/react'
-import { redirect } from 'next/navigation'
+import Session from '@/contexts/session/session'
 import useSWR from 'swr'
 import { ISupervisaoData } from './[supervisaoId]/page'
 
 export default function Supervisoes() {
-  const { data: session } = useSession({
-    required: true,
-    onUnauthenticated() {
-      redirect('/login?callbackUrl=/dashboard')
-    },
-  })
-
   const fetcher = (url: string) => fetch(url).then((res) => res.json())
   const hostname = 'server-lac-nine.vercel.app'
   const URL = `http://${hostname}/supervisoes`
@@ -25,7 +17,7 @@ export default function Supervisoes() {
   return (
     <div className="mx-auto w-full px-2 py-2">
       <div className="mx-auto w-full">
-        <Header session={session} titlePage="Supervisões" />
+        <Header session={Session()} titlePage="Supervisões" />
       </div>
       <StatsCardSupervisions dataSupervision={supervisoes} />
     </div>
