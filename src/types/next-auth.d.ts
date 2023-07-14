@@ -9,7 +9,7 @@ declare module 'next-auth' {
       email: string
       password: string
       image: string
-      firstName: string
+      name: string
       lastName: string
       cpf: string
       dateNasc: string | Date
