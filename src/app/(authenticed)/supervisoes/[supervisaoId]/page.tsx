@@ -2,7 +2,6 @@
 import Header from '@/components/Header'
 import { ICelula } from '@/components/ListCelulas'
 import StatsCardSupervision from '@/components/StatsCardSupervision'
-import { Providers } from '@/providers/supervisao/providers'
 import useSWR from 'swr'
 
 interface IUser {
@@ -40,13 +39,11 @@ export default function Supervisao({
   if (!supervisao) return <div>loading...</div>
 
   return (
-    <Providers>
-      <div className="mx-auto w-full px-2 py-2">
-        <div className="mx-auto w-full">
-          <Header titlePage={`${!error}` && `Supervisão ${supervisao.nome}`} />
-        </div>
-        <StatsCardSupervision supervisao={supervisao} />
+    <div className="mx-auto w-full px-2 py-2">
+      <div className="mx-auto w-full">
+        <Header titlePage={`${!error}` && `Supervisão ${supervisao.nome}`} />
       </div>
-    </Providers>
+      <StatsCardSupervision supervisao={supervisao} />
+    </div>
   )
 }

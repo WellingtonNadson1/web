@@ -2,10 +2,10 @@ import Sidebar from '@/components/Sidebar'
 import { Inter } from 'next/font/google'
 import React from 'react'
 import './globals.css'
-import { Providers } from '@/providers/supervisao/providers'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth'
 import { redirect } from 'next/navigation'
+import { Providers } from '@/providers/supervisao/providers'
 
 const inter = Inter({ subsets: ['latin'] })
 
