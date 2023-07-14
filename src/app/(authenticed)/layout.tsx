@@ -1,8 +1,8 @@
-import { Providers } from '@/Providers/supervisao'
 import Sidebar from '@/components/Sidebar'
 import { Inter } from 'next/font/google'
 import React from 'react'
 import './globals.css'
+import { Providers } from '@/providers/supervisao/providers'
 
 const inter = Inter({ subsets: ['latin'] })
 

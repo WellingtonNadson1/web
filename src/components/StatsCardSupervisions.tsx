@@ -3,15 +3,34 @@ import { ISupervisaoData } from '@/app/(authenticed)/supervisoes/[supervisaoId]/
 import { UsersFour } from '@phosphor-icons/react'
 import { useRouter } from 'next/navigation'
 import React from 'react'
+import useSWR from 'swr'
 
-interface SupervisoesProps {
-  dataSupervision: ISupervisaoData[]
-}
-
-export default function StatsCardSupervisions({
-  dataSupervision,
-}: SupervisoesProps) {
+export default function StatsCardSupervisions() {
   const router = useRouter()
+  const fetcher = (url: string) => fetch(url).then((res) => res.json())
+  const hostname = 'server-lac-nine.vercel.app'
+  const URL = `http://${hostname}/supervisoes`
+  const { data: supervisoes, error } = useSWR<ISupervisaoData[]>(URL, fetcher)
+  console.log(supervisoes)
+  if (error)
+    return (
+      <div className="mx-auto w-full px-2 py-2">
+        <div className="mx-auto w-full">
+          <div>failed to load</div>
+        </div>
+      </div>
+    )
+  if (!supervisoes)
+    return (
+      <div className="mx-auto w-full px-2 py-2">
+        <div className="mx-auto flex w-full items-center gap-2">
+          <div className="absolute bottom-1/2 right-1/2  translate-x-1/2 translate-y-1/2 transform ">
+            <div className="h-64 w-64 animate-spin  rounded-full border-8 border-solid border-blue-400 border-t-transparent"></div>
+          </div>
+          <div className="text-white">loading...</div>
+        </div>
+      </div>
+    )
 
   const handleSupervisaoSelecionada = (
     event: React.MouseEvent<HTMLElement>,
@@ -25,7 +44,7 @@ export default function StatsCardSupervisions({
     <>
       <div className="relative z-10 mx-auto w-full py-2">
         <div className="relative z-10 mx-auto mt-3 grid w-full grid-cols-1 flex-wrap items-center justify-between gap-4 p-2 sm:grid-cols-2 md:flex-nowrap">
-          {dataSupervision?.map((supervisao) => (
+          {supervisoes?.map((supervisao) => (
             <div
               onClick={handleSupervisaoSelecionada}
               key={supervisao.id}

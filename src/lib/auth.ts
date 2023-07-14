@@ -19,13 +19,26 @@ export const authOptions: NextAuthOptions = {
           placeholder: 'Seu Nome de Usuário',
         },
       },
+      // Implementando autenticação com API propria
       async authorize(credentials, req): Promise<any> {
-        const user = {
-          email: 'admin@admin.com',
-          password: '123456',
-          name: 'Wellington Nadson',
+        const hostname = 'server-lac-nine.vercel.app'
+        const URL = `http://${hostname}/login`
+        const response = await fetch(URL, {
+          method: 'POST',
+          headers: {
+            'Content-type': 'application/json',
+          },
+          body: JSON.stringify({
+            email: credentials?.email,
+            password: credentials?.password,
+          }),
+        })
+        const user = await response.json()
+
+        if (user && response.ok) {
+          return user
         }
-        return user
+        return null
       },
     }),
     GoogleProvider({

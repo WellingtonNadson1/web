@@ -1,4 +1,4 @@
-import { Providers } from '@/Providers/supervisao'
+import { Providers } from '@/providers/supervisao/providers'
 import React from 'react'
 import '../globals.css'
 

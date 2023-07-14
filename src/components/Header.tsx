@@ -1,3 +1,4 @@
+'use client'
 import { format } from 'date-fns'
 import { pt } from 'date-fns/locale'
 import { useSession } from 'next-auth/react'

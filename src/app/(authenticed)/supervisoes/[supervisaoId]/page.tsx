@@ -1,5 +1,5 @@
 'use client'
-import { Providers } from '@/Providers/supervisao'
+import { Providers } from '@/providers/supervisao'
 import Header from '@/components/Header'
 import { ICelula } from '@/components/ListCelulas'
 import StatsCardSupervision from '@/components/StatsCardSupervision'
