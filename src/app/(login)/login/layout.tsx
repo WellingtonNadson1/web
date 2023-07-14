@@ -1,4 +1,4 @@
-import { Providers } from '@/providers/supervisao/providers'
+import { Providers } from '@/providers/providers'
 import React from 'react'
 import '../globals.css'
 import { getServerSession } from 'next-auth'

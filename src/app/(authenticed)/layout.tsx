@@ -5,7 +5,7 @@ import './globals.css'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth'
 import { redirect } from 'next/navigation'
-import { Providers } from '@/providers/supervisao/providers'
+import { Providers } from '@/providers/providers'
 
 const inter = Inter({ subsets: ['latin'] })
 
