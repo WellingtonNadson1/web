@@ -3,10 +3,30 @@ import { GoogleLogo } from '@phosphor-icons/react'
 import { signIn, useSession } from 'next-auth/react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { redirect } from 'next/navigation'
+import { redirect, useRouter } from 'next/navigation'
+import { SyntheticEvent, useState } from 'react'
 
 export default function Login() {
   const { data: session } = useSession()
+  const [email, setEmail] = useState<string>('')
+  const [password, setPassword] = useState<string>('')
+  const router = useRouter()
+
+  async function handleSubmit(event: SyntheticEvent) {
+    event.preventDefault()
+    const result = await signIn('credentials', {
+      email,
+      password,
+      redirect: false,
+    })
+
+    if (result?.error) {
+      console.log(result)
+      return
+    }
+
+    router.replace('/dashboard')
+  }
 
   return (
     <>
@@ -24,7 +44,6 @@ export default function Login() {
           </div>
           {/* Login Container */}
           <div className="flex max-w-3xl items-center rounded-2xl bg-white p-6 shadow-lg">
-            {/* form */}
             <div className="px-6 py-1.5 md:w-1/2">
               <h2 className="mt-4 text-center text-2xl font-bold text-gray-900 md:text-left">
                 Seja Bem-vindo!
@@ -33,8 +52,13 @@ export default function Login() {
                 Para logar, entre com seus dados.
               </p>
 
+              {/* form */}
               <div className="mt-8 md:mx-auto md:w-full md:max-w-sm">
-                <form className="space-y-5" action="#" method="POST">
+                <form
+                  className="space-y-5"
+                  onSubmit={handleSubmit}
+                  method="POST"
+                >
                   <div>
                     <label
                       htmlFor="email"
@@ -49,6 +73,7 @@ export default function Login() {
                         type="email"
                         autoComplete="email"
                         placeholder="Digite seu e-mail"
+                        onChange={(e) => setEmail(e.target.value)}
                         required
                         className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#014874] sm:text-sm sm:leading-7"
                       />
@@ -71,6 +96,7 @@ export default function Login() {
                         type="password"
                         autoComplete="current-password"
                         placeholder="Digite sua senha"
+                        onChange={(e) => setPassword(e.target.value)}
                         required
                         className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#014874] sm:text-sm sm:leading-7"
                       />
@@ -110,7 +136,6 @@ export default function Login() {
 
                   <div>
                     <button
-                      onClick={() => signIn()}
                       type="submit"
                       className="flex w-full justify-center rounded-md bg-[#014874] px-3 py-1.5 text-sm font-semibold leading-7 text-white shadow-sm duration-100 hover:bg-[#1D70B6] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#014874]"
                     >
@@ -126,7 +151,7 @@ export default function Login() {
                   type="button"
                   className="flex w-full items-center justify-center rounded-md bg-white px-3 py-1.5 text-sm font-semibold leading-7 text-white shadow-sm ring-1 ring-red-300 duration-100 hover:bg-gray-100/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-500"
                 >
-                  <GoogleLogo color="#f00" size={24} weigth="bold" />
+                  <GoogleLogo color="#f00" size={24} weight="bold" />
                   <span className="ml-2 text-sm font-semibold leading-7 text-gray-900">
                     Entrar com Google
                   </span>

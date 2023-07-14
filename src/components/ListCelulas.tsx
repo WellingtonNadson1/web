@@ -1,4 +1,4 @@
-import { useSupervisaoContext } from '@/contexts/supervisao'
+import { useSupervisaoContext } from '@/contexts/supervisao/supervisao'
 import { useRouter } from 'next/navigation'
 import React from 'react'
 

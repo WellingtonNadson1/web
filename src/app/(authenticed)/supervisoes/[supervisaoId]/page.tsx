@@ -1,8 +1,8 @@
 'use client'
-import { Providers } from '@/providers/supervisao'
 import Header from '@/components/Header'
 import { ICelula } from '@/components/ListCelulas'
 import StatsCardSupervision from '@/components/StatsCardSupervision'
+import { Providers } from '@/providers/supervisao/providers'
 import useSWR from 'swr'
 
 interface IUser {

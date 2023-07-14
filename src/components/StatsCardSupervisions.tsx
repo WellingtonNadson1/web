@@ -1,5 +1,6 @@
 'use client'
 import { ISupervisaoData } from '@/app/(authenticed)/supervisoes/[supervisaoId]/page'
+import { useSupervisaoContext } from '@/contexts/supervisao/supervisao'
 import { UsersFour } from '@phosphor-icons/react'
 import { useRouter } from 'next/navigation'
 import React from 'react'
@@ -7,6 +8,7 @@ import useSWR from 'swr'
 
 export default function StatsCardSupervisions() {
   const router = useRouter()
+  const i = useSupervisaoContext()
   const fetcher = (url: string) => fetch(url).then((res) => res.json())
   const hostname = 'server-lac-nine.vercel.app'
   const URL = `http://${hostname}/supervisoes`
@@ -31,6 +33,7 @@ export default function StatsCardSupervisions() {
         </div>
       </div>
     )
+  console.log('Este é o I: ', i)
 
   const handleSupervisaoSelecionada = (
     event: React.MouseEvent<HTMLElement>,
