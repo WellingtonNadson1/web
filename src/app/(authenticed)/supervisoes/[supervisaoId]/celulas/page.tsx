@@ -1,6 +1,6 @@
 'use client'
 import Header from '@/components/Header'
-import ListCelulas from '@/components/ListCelulas'
+// import ListCelulas from '@/components/ListCelulas'
 
 export default function CelulasSupervision() {
   return (
@@ -10,7 +10,7 @@ export default function CelulasSupervision() {
       </div>
 
       {/* Celulas */}
-      <ListCelulas />
+      {/* <ListCelulas /> */}
     </div>
   )
 }
