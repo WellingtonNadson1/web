@@ -3,8 +3,6 @@ import { Providers } from '@/Providers/supervisao'
 import Header from '@/components/Header'
 import { ICelula } from '@/components/ListCelulas'
 import StatsCardSupervision from '@/components/StatsCardSupervision'
-import { useSession } from 'next-auth/react'
-import { redirect } from 'next/navigation'
 import useSWR from 'swr'
 
 interface IUser {
@@ -32,12 +30,6 @@ export default function Supervisao({
 }: {
   params: { supervisaoId: string }
 }) {
-  const { data: session } = useSession({
-    required: true,
-    onUnauthenticated() {
-      redirect('/login?callbackUrl=/dashboard')
-    },
-  })
   console.log('Id da Supervisao aqui', supervisaoId)
 
   const fetcher = (url: string) => fetch(url).then((res) => res.json())
@@ -51,10 +43,7 @@ export default function Supervisao({
     <Providers>
       <div className="mx-auto w-full px-2 py-2">
         <div className="mx-auto w-full">
-          <Header
-            session={session}
-            titlePage={`${!error}` && `Supervisão ${supervisao.nome}`}
-          />
+          <Header titlePage={`${!error}` && `Supervisão ${supervisao.nome}`} />
         </div>
         <StatsCardSupervision supervisao={supervisao} />
       </div>

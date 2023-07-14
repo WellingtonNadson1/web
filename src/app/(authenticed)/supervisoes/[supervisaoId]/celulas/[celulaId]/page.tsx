@@ -4,8 +4,7 @@ import ControlePresenca from '@/components/ControlePresenca'
 import Header from '@/components/Header'
 import LicoesCelula from '@/components/LicoesCelula'
 import { ICelula } from '@/components/ListCelulas'
-import { useSession } from 'next-auth/react'
-import { redirect, useParams } from 'next/navigation'
+import { useParams } from 'next/navigation'
 import useSWR from 'swr'
 
 export default function ControleCelulaSupervision({
@@ -13,13 +12,6 @@ export default function ControleCelulaSupervision({
 }: {
   params: { celulaId: string }
 }) {
-  const { data: session } = useSession({
-    required: true,
-    onUnauthenticated() {
-      redirect('/login?callbackUrl=/dashboard')
-    },
-  })
-
   console.log(useParams())
   const fetcher = (url: string) => fetch(url).then((res) => res.json())
   const hostname = 'server-lac-nine.vercel.app'
@@ -33,7 +25,7 @@ export default function ControleCelulaSupervision({
   return (
     <div className="relative mx-auto w-full px-2 py-2">
       <div className="relative mx-auto w-full">
-        <Header session={session} titlePage={`Célula ${data?.nome}`} />
+        <Header titlePage={`Célula ${data?.nome}`} />
       </div>
       <div className="relative mx-auto mb-4 mt-3 w-full px-2">
         <Calendar />

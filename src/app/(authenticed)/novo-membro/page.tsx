@@ -1,7 +1,5 @@
 'use client'
 import Header from '@/components/Header'
-import { useSession } from 'next-auth/react'
-import { redirect } from 'next/navigation'
 import React, { useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import useSWR from 'swr'
@@ -52,12 +50,6 @@ export interface SupervisaoData {
 }
 
 export default function NovoMembro() {
-  const { data: session } = useSession({
-    required: true,
-    onUnauthenticated() {
-      redirect('/login?callbackUrl=/dashboard')
-    },
-  })
   const hostname = 'server-lac-nine.vercel.app'
   const { register, handleSubmit } = useForm<Inputs>()
   const onSubmit: SubmitHandler<Inputs> = (data) => {
@@ -93,7 +85,7 @@ export default function NovoMembro() {
 
   return (
     <div className="relative mx-auto w-full px-2 py-2">
-      <Header session={session} titlePage="Novo Membro" />
+      <Header titlePage="Novo Membro" />
       <div className="flex justify-between">
         <div className="relative mx-auto px-2 py-7">
           <div className="mx-auto rounded-lg bg-white p-6">
