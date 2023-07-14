@@ -3,6 +3,9 @@ import { Inter } from 'next/font/google'
 import React from 'react'
 import './globals.css'
 import { Providers } from '@/providers/supervisao/providers'
+import { getServerSession } from 'next-auth'
+import { authOptions } from '@/lib/auth'
+import { redirect } from 'next/navigation'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -16,6 +19,10 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+  const session = await getServerSession(authOptions)
+  if (!session) {
+    redirect('/login')
+  }
   return (
     <html lang="pt">
       <body className={inter.className}>
