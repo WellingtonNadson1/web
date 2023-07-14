@@ -44,7 +44,7 @@ export default function StatsCardSupervisions({
               </div>
               <div className="flex items-center">
                 <span className="text-lg font-semibold">
-                  {supervisao.supervisor.firstName}
+                  {supervisao.supervisor?.firstName}
                 </span>
               </div>
               <div className="flex items-center">

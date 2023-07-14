@@ -14,10 +14,12 @@ export default function Supervisoes() {
   if (error) return <div>failed to load</div>
   if (!supervisoes) return <div>loading...</div>
 
+  const { {Session: session}: {Session: Session | null} } = Session()
+
   return (
     <div className="mx-auto w-full px-2 py-2">
       <div className="mx-auto w-full">
-        <Header session={Session()} titlePage="Supervisões" />
+        <Header session={session} titlePage="Supervisões" />
       </div>
       <StatsCardSupervisions dataSupervision={supervisoes} />
     </div>

@@ -58,9 +58,9 @@ export default function NovoMembro() {
       redirect('/login?callbackUrl=/dashboard')
     },
   })
+  const hostname = 'server-lac-nine.vercel.app'
   const { register, handleSubmit } = useForm<Inputs>()
   const onSubmit: SubmitHandler<Inputs> = (data) => {
-    const hostname = 'server-lac-nine.vercel.app'
     const URL = `http://${hostname}/users`
     fetch(URL, {
       method: 'POST',
@@ -72,12 +72,12 @@ export default function NovoMembro() {
   }
 
   const fetcher = (url: string) => fetch(url).then((res) => res.json())
-  const hostname = 'server-lac-nine.vercel.app'
   const URL = `http://${hostname}/supervisoes`
   const { data: supervisoes, isLoading } = useSWR<SupervisaoData[]>(
     URL,
     fetcher,
   )
+  console.log('Seguem as Supervisões do Cadastro', supervisoes)
 
   const [supervisaoSelecionada, setSupervisaoSelecionada] = useState<string>()
 
