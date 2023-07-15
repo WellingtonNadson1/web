@@ -3,7 +3,7 @@ import { GoogleLogo } from '@phosphor-icons/react'
 import { signIn, useSession } from 'next-auth/react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { redirect, useRouter } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import { SyntheticEvent, useState } from 'react'
 
 export default function Login() {
@@ -30,7 +30,7 @@ export default function Login() {
 
   return (
     <>
-      {session && redirect('/dashboard')}
+      {session && router.replace('/dashboard')}
       {!session && (
         <section className="flex min-h-screen flex-col items-center justify-center gap-4 bg-[#F5F7F9]">
           {/* image */}
@@ -54,11 +54,7 @@ export default function Login() {
 
               {/* form */}
               <div className="mt-8 md:mx-auto md:w-full md:max-w-sm">
-                <form
-                  className="space-y-5"
-                  onSubmit={handleSubmit}
-                  method="POST"
-                >
+                <form className="space-y-5" onSubmit={handleSubmit}>
                   <div>
                     <label
                       htmlFor="email"
