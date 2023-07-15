@@ -22,7 +22,6 @@ export default async function StatsCardSupervisions() {
     error,
     isLoading,
   } = useSWR<ISupervisaoData[]>(URL, fetcher, { revalidateOnMount: false })
-  console.log(supervisoes)
   if (error)
     return (
       <div className="mx-auto w-full px-2 py-2">
