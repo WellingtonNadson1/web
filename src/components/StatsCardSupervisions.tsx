@@ -21,7 +21,7 @@ export default async function StatsCardSupervisions() {
     data: supervisoes,
     error,
     isLoading,
-  } = useSWR<ISupervisaoData[]>(URL, fetcher)
+  } = useSWR<ISupervisaoData[]>(URL, fetcher, { revalidateOnMount: false })
   console.log(supervisoes)
   if (error)
     return (
