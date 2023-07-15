@@ -13,11 +13,6 @@ export const authOptions: NextAuthOptions = {
           placeholder: 'example@example.com',
         },
         password: { label: 'Senha', type: 'password' },
-        name: {
-          label: 'Nome',
-          type: 'text',
-          placeholder: 'Seu Nome de Usuário',
-        },
       },
       // Implementando autenticação com API propria
       async authorize(credentials, req): Promise<any> {
@@ -26,7 +21,7 @@ export const authOptions: NextAuthOptions = {
         const response = await fetch(URL, {
           method: 'POST',
           headers: {
-            'Content-type': 'application/json',
+            'Content-Type': 'application/json',
           },
           body: JSON.stringify({
             email: credentials?.email,
