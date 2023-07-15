@@ -66,7 +66,7 @@ export default function Login() {
                       <input
                         id="email"
                         name="email"
-                        type="text"
+                        type="email"
                         autoComplete="email"
                         placeholder="Digite seu e-mail"
                         onChange={(e) => setEmail(e.target.value)}

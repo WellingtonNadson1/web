@@ -9,7 +9,7 @@ export const authOptions: NextAuthOptions = {
       credentials: {
         email: {
           label: 'Email',
-          type: 'text',
+          type: 'email',
           placeholder: 'example@example.com',
         },
         password: { label: 'Senha', type: 'password' },
