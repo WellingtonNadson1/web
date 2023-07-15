@@ -10,7 +10,11 @@ export default async function StatsCardSupervisions() {
   const fetcher = (url: string) => fetch(url).then((res) => res.json())
   const hostname = 'server-lac-nine.vercel.app'
   const URL = `https://${hostname}/supervisoes`
-  const { data: supervisoes, error } = useSWR<ISupervisaoData[]>(URL, fetcher)
+  const {
+    data: supervisoes,
+    error,
+    isLoading,
+  } = useSWR<ISupervisaoData[]>(URL, fetcher)
   console.log(supervisoes)
   if (error)
     return (
@@ -20,11 +24,11 @@ export default async function StatsCardSupervisions() {
         </div>
       </div>
     )
-  if (!supervisoes)
+  if (isLoading)
     return (
       <div className="mx-auto w-full px-2 py-2">
         <div className="mx-auto flex w-full items-center gap-2">
-          <div className="text-white">loading...</div>
+          <div className="text-white">carregando...</div>
         </div>
       </div>
     )
