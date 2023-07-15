@@ -2,10 +2,17 @@
 import { ISupervisaoData } from '@/app/(authenticed)/supervisoes/[supervisaoId]/page'
 import { UsersFour } from '@phosphor-icons/react'
 import { useRouter } from 'next/navigation'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+
 import useSWR from 'swr'
 
 export default async function StatsCardSupervisions() {
+  const [count, setCount] = useState(1)
+  useEffect(() => {
+    setCount(count + 1)
+    console.log('O estado count foi atualizado:', count)
+  }, [count])
+
   const router = useRouter()
   const fetcher = (url: string) => fetch(url).then((res) => res.json())
   const hostname = 'server-lac-nine.vercel.app'
