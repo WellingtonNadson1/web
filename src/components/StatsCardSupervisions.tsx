@@ -24,9 +24,6 @@ export default async function StatsCardSupervisions() {
     return (
       <div className="mx-auto w-full px-2 py-2">
         <div className="mx-auto flex w-full items-center gap-2">
-          <div className="absolute bottom-1/2 right-1/2  translate-x-1/2 translate-y-1/2 transform ">
-            <div className="h-64 w-64 animate-spin  rounded-full border-8 border-solid border-blue-400 border-t-transparent"></div>
-          </div>
           <div className="text-white">loading...</div>
         </div>
       </div>
