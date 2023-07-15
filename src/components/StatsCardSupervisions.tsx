@@ -9,7 +9,7 @@ export default async function StatsCardSupervisions() {
   const router = useRouter()
   const fetcher = (url: string) => fetch(url).then((res) => res.json())
   const hostname = 'server-lac-nine.vercel.app'
-  const URL = `http://${hostname}/supervisoes`
+  const URL = `https://${hostname}/supervisoes`
   const { data: supervisoes, error } = useSWR<ISupervisaoData[]>(URL, fetcher)
   console.log(supervisoes)
   if (error)
