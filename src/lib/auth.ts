@@ -17,7 +17,7 @@ export const authOptions: NextAuthOptions = {
       // Implementando autenticação com API propria
       async authorize(credentials, req): Promise<any> {
         const hostname = 'server-lac-nine.vercel.app'
-        const URL = `http://${hostname}/login`
+        const URL = `https://${hostname}/login`
         const response = await fetch(URL, {
           method: 'POST',
           headers: {
@@ -28,7 +28,6 @@ export const authOptions: NextAuthOptions = {
             password: credentials?.password,
           }),
         })
-        console.log({ response })
         const user = await response.json()
 
         if (user && response.ok) {
@@ -42,7 +41,6 @@ export const authOptions: NextAuthOptions = {
       clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
     }),
   ],
-  debug: process.env.NODE_ENV === 'development',
   // secret: process.env.NEXTAUTH_SCRET,
   pages: {
     signIn: '/login',
