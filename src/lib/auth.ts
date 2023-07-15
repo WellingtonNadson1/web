@@ -22,7 +22,7 @@ export const authOptions: NextAuthOptions = {
       // Implementando autenticação com API propria
       async authorize(credentials, req): Promise<any> {
         const hostname = 'server-lac-nine.vercel.app'
-        const URL = `http://${hostname}/login`
+        const URL = `http://${hostname}/users`
         const response = await fetch(URL, {
           method: 'POST',
           headers: {
