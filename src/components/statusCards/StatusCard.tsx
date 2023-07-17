@@ -1,4 +1,4 @@
-import { ChartLineUp, Confetti, HandsPraying } from '@phosphor-icons/react'
+import { IconStatus } from './Icons'
 
 export default function StatsCard() {
   const statusIbb = [
@@ -7,7 +7,7 @@ export default function StatsCard() {
       porcentagem: '+32.48%',
       total: '234',
       status: 'up',
-      icon: HandsPraying,
+      icon: IconStatus().HandsPraying,
       color: 'bg-[#6074E1]',
       destaq: ' o último mês',
     },
@@ -16,7 +16,7 @@ export default function StatsCard() {
       porcentagem: '+72.48%',
       total: '334',
       status: 'up',
-      icon: Confetti,
+      icon: IconStatus().Confetti,
       color: 'bg-[#F55343]',
       destaq: ' o último ano',
     },
@@ -25,7 +25,7 @@ export default function StatsCard() {
       porcentagem: '+52.48%',
       total: '234',
       status: 'up',
-      icon: ChartLineUp,
+      icon: IconStatus().ChartLineUp,
       color: 'bg-[#5fe2c2]',
       destaq: ' o último culto',
     },
