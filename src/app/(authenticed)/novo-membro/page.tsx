@@ -53,7 +53,7 @@ export default function NovoMembro() {
   const hostname = 'server-lac-nine.vercel.app'
   const { register, handleSubmit } = useForm<Inputs>()
   const onSubmit: SubmitHandler<Inputs> = (data) => {
-    const URL = `http://${hostname}/users`
+    const URL = `https://${hostname}/users`
     fetch(URL, {
       method: 'POST',
       headers: {

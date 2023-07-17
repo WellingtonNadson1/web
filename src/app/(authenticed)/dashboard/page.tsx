@@ -1,4 +1,3 @@
-'use client'
 import Header from '@/components/Header'
 import MainSide from '@/components/MainSide'
 
