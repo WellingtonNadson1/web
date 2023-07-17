@@ -64,7 +64,7 @@ export default function NovoMembro() {
   }
 
   const fetcher = (url: string) => fetch(url).then((res) => res.json())
-  const URL = `http://${hostname}/supervisoes`
+  const URL = `https://${hostname}/supervisoes`
   const { data: supervisoes, isLoading } = useSWR<SupervisaoData[]>(
     URL,
     fetcher,
@@ -90,11 +90,7 @@ export default function NovoMembro() {
         <div className="relative mx-auto px-2 py-7">
           <div className="mx-auto rounded-lg bg-white p-6">
             {/* Incio do Forms */}
-            <form
-              onSubmit={handleSubmit(onSubmit)}
-              action="/dashboard"
-              method="post"
-            >
+            <form onSubmit={handleSubmit(onSubmit)}>
               <div className="border-b border-gray-900/10 pb-12">
                 <h2 className="text-sm uppercase leading-normal text-gray-400">
                   Informações Pessoais
