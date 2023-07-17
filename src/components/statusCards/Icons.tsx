@@ -1,3 +1,4 @@
+'use client'
 import { ChartLineUp, Confetti, HandsPraying } from '@phosphor-icons/react'
 
 export const IconStatus = () => {
