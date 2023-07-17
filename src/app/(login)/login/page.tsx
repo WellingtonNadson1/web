@@ -4,28 +4,39 @@ import { signIn } from 'next-auth/react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { SyntheticEvent, useState } from 'react'
+import { SubmitErrorHandler, SubmitHandler, useForm } from 'react-hook-form'
+
+type TypeLogin = {
+  email: string
+  password: string
+}
 
 export default function Login() {
   // const { data: session } = useSession()
-  const [email, setEmail] = useState<string>('')
-  const [password, setPassword] = useState<string>('')
   const router = useRouter()
 
-  async function handleSubmit(event: SyntheticEvent) {
-    event.preventDefault()
+  const { handleSubmit, register } = useForm<TypeLogin>()
+
+  const onSubmit: SubmitHandler<TypeLogin> = async ({
+    email,
+    password,
+  }: TypeLogin) => {
     const result = await signIn('credentials', {
       email,
       password,
       redirect: false,
     })
+    console.log(email, password)
 
     if (result?.error) {
       return
     }
 
+    console.log(result)
     router.replace('/dashboard')
   }
+
+  const onError: SubmitErrorHandler<TypeLogin> = (erros) => console.log(erros)
 
   return (
     <>
@@ -53,7 +64,10 @@ export default function Login() {
 
             {/* form */}
             <div className="mt-8 md:mx-auto md:w-full md:max-w-sm">
-              <form className="space-y-5" onSubmit={handleSubmit}>
+              <form
+                className="space-y-5"
+                onSubmit={handleSubmit(onSubmit, onError)}
+              >
                 <div>
                   <label
                     htmlFor="email"
@@ -63,12 +77,12 @@ export default function Login() {
                   </label>
                   <div className="mt-2">
                     <input
+                      {...register('email')}
                       id="email"
                       name="email"
                       type="email"
                       autoComplete="email"
                       placeholder="Digite seu e-mail"
-                      onChange={(e) => setEmail(e.target.value)}
                       required
                       className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#014874] sm:text-sm sm:leading-7"
                     />
@@ -86,12 +100,12 @@ export default function Login() {
                   </div>
                   <div className="mt-2">
                     <input
+                      {...register('password')}
                       id="password"
                       name="password"
                       type="password"
                       autoComplete="current-password"
                       placeholder="Digite sua senha"
-                      onChange={(e) => setPassword(e.target.value)}
                       required
                       className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#014874] sm:text-sm sm:leading-7"
                     />
