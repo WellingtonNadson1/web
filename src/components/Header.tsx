@@ -1,23 +1,18 @@
-'use client'
+import { authOptions } from '@/app/api/auth/[...nextauth]/auth'
 import { format } from 'date-fns'
 import { pt } from 'date-fns/locale'
-import { useSession } from 'next-auth/react'
+import { getServerSession } from 'next-auth'
 import Image from 'next/image'
-import { redirect } from 'next/navigation'
 
 type TitlePage = {
   titlePage: string
 }
 
-export default function Header(props: TitlePage) {
+export default async function Header(props: TitlePage) {
   const toDay = format(new Date(), 'PP', { locale: pt })
 
-  const { data: session } = useSession({
-    required: true,
-    onUnauthenticated() {
-      redirect('/login?callbackUrl=/dashboard')
-    },
-  })
+  const session = await getServerSession(authOptions)
+  console.log('Session Header: ', JSON.stringify(session))
 
   return (
     <>
@@ -31,14 +26,15 @@ export default function Header(props: TitlePage) {
         <div className="flex w-1/2 items-center justify-end gap-2 sm:w-1/2 sm:gap-8">
           <div>
             <h2 className="hidden text-xs text-gray-700 sm:block">
-              Shalom, <span className="font-bold">{session?.user?.name}</span>
+              Shalom,{' '}
+              <span className="font-bold">{session?.user?.firstName}</span>
             </h2>
             <p className="hidden text-xs text-gray-700 sm:block">{toDay}</p>
           </div>
-          {session?.user?.image ? (
+          {session?.user?.photoPerfil ? (
             <div className="h-10 w-10 rounded-full bg-gray-50">
               <Image
-                src={session.user.image}
+                src={session.user.photoPerfil}
                 width={58}
                 height={58}
                 alt="Wellington"
