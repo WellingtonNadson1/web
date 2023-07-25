@@ -2,10 +2,11 @@ import Sidebar from '@/components/Sidebar'
 import { Inter } from 'next/font/google'
 import React from 'react'
 import './globals.css'
-import { getServerSession } from 'next-auth'
-import { authOptions } from '@/lib/auth'
-import { redirect } from 'next/navigation'
 import { Providers } from '@/providers/providers'
+import { authOptions } from '@/app/api/auth/[...nextauth]/auth'
+import { redirect } from 'next/navigation'
+import { RedirectType } from 'next/dist/client/components/redirect'
+import { getServerSession } from 'next-auth'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -21,12 +22,9 @@ export default async function RootLayout({
 }) {
   const session = await getServerSession(authOptions)
 
-  if (session) {
-    console.log(`Session: ${session}`)
-  }
-
   if (!session) {
-    redirect('/login')
+    console.log({ message: 'You must be logged in.' })
+    return redirect('/login', RedirectType.replace)
   }
   return (
     <html lang="pt">

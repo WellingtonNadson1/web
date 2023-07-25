@@ -1,5 +1,6 @@
 'use client'
 
+import { cn } from '@/lib/utils'
 import {
   Baby,
   Calendar,
@@ -15,6 +16,7 @@ import {
 import { signOut } from 'next-auth/react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { useState } from 'react'
 
 const sidebar = [
@@ -29,6 +31,7 @@ const sidebar = [
 ]
 export default function Sidebar() {
   const [open, setOpen] = useState(false)
+  const pathName = usePathname().split('/')[1]
   return (
     <div className="shadow">
       <aside
@@ -69,7 +72,12 @@ export default function Sidebar() {
             <li key={item.name} className="z-50">
               <Link
                 href={item.href}
-                className={` group flex transform cursor-pointer items-center gap-x-2 rounded-md py-2 pl-2 text-sm font-medium leading-5 text-gray-500 transition duration-150 ease-in-out hover:scale-105 hover:bg-[#1D70B6] hover:fill-current hover:text-gray-200 focus:outline-none`}
+                className={cn(
+                  `group flex transform cursor-pointer items-center gap-x-2 rounded-md py-2 pl-2 text-sm font-medium leading-5 text-gray-500 transition duration-150 ease-in-out hover:scale-105 hover:bg-[#1D70B6] hover:fill-current hover:text-gray-200 focus:outline-none`,
+                  `/${pathName}` === item.href
+                    ? 'bg-[#1D70B6] text-gray-200'
+                    : 'text-zinc-400',
+                )}
               >
                 <item.icon
                   className={`${!open ? 'w-screen' : ''}`}
