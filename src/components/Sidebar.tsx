@@ -5,7 +5,7 @@ import {
   Baby,
   Calendar,
   ChartBar,
-  House,
+  // House,
   SignOut,
   Student,
   Users,
@@ -13,14 +13,14 @@ import {
   Wallet,
   X,
 } from '@phosphor-icons/react'
+import { LayoutDashboard } from 'lucide-react'
 import { signOut } from 'next-auth/react'
 import Image from 'next/image'
-import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import { useState } from 'react'
 
 const sidebar = [
-  { name: 'Dashboard', icon: House, href: '/dashboard' },
+  { name: 'Dashboard', icon: LayoutDashboard, href: '/dashboard' },
   { name: 'Novo Memb.', icon: Baby, href: '/novo-membro' },
   { name: 'Supervisões', icon: UsersFour, href: '/supervisoes' },
   { name: 'Células', icon: Users, href: '/celulas' },
@@ -31,6 +31,7 @@ const sidebar = [
 ]
 export default function Sidebar() {
   const [open, setOpen] = useState(false)
+  const route = useRouter()
   const pathName = usePathname().split('/')[1]
   return (
     <div className="shadow">
@@ -39,17 +40,16 @@ export default function Sidebar() {
           open ? 'w-48' : 'w-[4.8rem]'
         } bg-white px-4  py-6 duration-500`}
       >
-        <Link href="/dashboard">
-          <Image
-            src="/images/logo-ibb-1.svg"
-            width={54}
-            height={54}
-            alt="logo ibb"
-            className={`cursor-pointer ${
-              !open ? 'mx-auto' : 'mx-2'
-            } transition-all duration-200`}
-          />
-        </Link>
+        <Image
+          src="/images/logo-ibb-1.svg"
+          onClick={() => route.push('/dashboard')}
+          width={54}
+          height={54}
+          alt="logo ibb"
+          className={`cursor-pointer ${
+            !open ? 'mx-auto' : 'mx-2'
+          } transition-all duration-200`}
+        />
 
         <div
           className={`absolute top-[3.8rem] z-50 flex cursor-pointer justify-end rounded-full border border-white bg-[#3e98e1] p-1.5 text-3xl text-white duration-500 hover:rounded-full hover:bg-slate-400/90 hover:fill-white ${
@@ -69,36 +69,35 @@ export default function Sidebar() {
 
         <ul className="relative flex flex-col gap-y-2 pt-4">
           {sidebar.map((item) => (
-            <li key={item.name} className="z-50">
-              <Link
-                href={item.href}
-                className={cn(
-                  `group flex transform cursor-pointer items-center gap-x-2 rounded-md py-2 pl-2 text-sm font-medium leading-5 text-gray-500 transition duration-150 ease-in-out hover:scale-105 hover:bg-[#1D70B6] hover:fill-current hover:text-gray-200 focus:outline-none`,
-                  `/${pathName}` === item.href
-                    ? 'bg-[#1D70B6] text-gray-200'
-                    : 'text-zinc-400',
-                )}
+            <li
+              key={item.name}
+              onClick={() => route.push(item.href)}
+              className={cn(
+                `group z-50 flex transform cursor-pointer items-center gap-x-2 rounded-md py-2 pl-2 text-sm font-medium leading-5 text-gray-500 transition duration-150 ease-in-out hover:scale-105 hover:bg-[#1D70B6] hover:fill-current hover:text-gray-200 focus:outline-none`,
+                `/${pathName}` === item.href
+                  ? 'bg-[#1D70B6] text-gray-200'
+                  : 'text-zinc-400',
+              )}
+            >
+              <item.icon
+                className={`${!open ? 'w-screen' : ''}`}
+                width={`${open ? 24 : 26}`}
+                height={`${open ? 24 : 26}`}
+              />
+              <span
+                className={`whitespace-pre duration-150 ${
+                  !open && 'translate-x-28 overflow-hidden opacity-0'
+                }`}
               >
-                <item.icon
-                  className={`${!open ? 'w-screen' : ''}`}
-                  width={`${open ? 24 : 26}`}
-                  height={`${open ? 24 : 26}`}
-                />
-                <span
-                  className={`whitespace-pre duration-150 ${
-                    !open && 'translate-x-28 overflow-hidden opacity-0'
-                  }`}
-                >
-                  {item.name}
-                </span>
-                <span
-                  className={`${
-                    open && 'hidden'
-                  } absolute left-12 m-2 w-auto min-w-max origin-left scale-0 rounded-md bg-white p-2 text-xs font-bold text-gray-700 shadow-md transition-all duration-100 group-hover:scale-100`}
-                >
-                  {item.name}
-                </span>
-              </Link>
+                {item.name}
+              </span>
+              <span
+                className={`${
+                  open && 'hidden'
+                } absolute left-12 m-2 w-auto min-w-max origin-left scale-0 rounded-md bg-white p-2 text-xs font-bold text-gray-700 shadow-md transition-all duration-100 group-hover:scale-100`}
+              >
+                {item.name}
+              </span>
             </li>
           ))}
           <button

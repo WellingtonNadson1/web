@@ -37,7 +37,7 @@ export default function StatsCard() {
       {statusIbb.map((stat) => (
         <div
           key={stat.title}
-          className="flex-warp relative w-full cursor-pointer flex-col rounded-lg bg-white p-4 shadow-md hover:bg-white/95"
+          className="flex-warp relative w-full cursor-pointer flex-col rounded-lg border-black/5 bg-white p-4 transition hover:shadow-md"
         >
           <div className="flex w-full items-center justify-between">
             <div className="mb-0 font-sans text-sm font-semibold uppercase leading-normal">
