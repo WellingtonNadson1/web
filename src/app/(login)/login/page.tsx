@@ -26,13 +26,10 @@ export default function Login() {
       password,
       redirect: false,
     })
-    console.log(email, password)
 
     if (result?.error) {
       return
     }
-
-    console.log(result)
     router.replace('/dashboard')
   }
 

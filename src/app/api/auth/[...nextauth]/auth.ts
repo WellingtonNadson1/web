@@ -3,6 +3,9 @@ import CredentialProvider from 'next-auth/providers/credentials'
 import GoogleProvider from 'next-auth/providers/google'
 
 export const authOptions: NextAuthOptions = {
+  session: {
+    strategy: 'jwt',
+  },
   providers: [
     CredentialProvider({
       name: 'credentials',
@@ -41,6 +44,16 @@ export const authOptions: NextAuthOptions = {
       clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
     }),
   ],
+  callbacks: {
+    async jwt({ token, user }) {
+      return { ...token, ...user }
+    },
+
+    async session({ session, token, user }) {
+      session.user = token as any
+      return session
+    },
+  },
   // secret: process.env.NEXTAUTH_SCRET,
   pages: {
     signIn: '/login',
