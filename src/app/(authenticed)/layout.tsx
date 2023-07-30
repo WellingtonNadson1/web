@@ -2,10 +2,11 @@ import Sidebar from '@/components/Sidebar'
 import React from 'react'
 import './globals.css'
 import { Providers } from '@/providers/providers'
-import { authOptions } from '@/app/api/auth/[...nextauth]/auth'
-import { redirect } from 'next/navigation'
-import { RedirectType } from 'next/dist/client/components/redirect'
 import { getServerSession } from 'next-auth'
+import { authOptions } from '../api/auth/[...nextauth]/auth'
+import { RedirectType } from 'next/dist/client/components/redirect'
+import { redirect } from 'next/navigation'
+import Header from '@/components/Header'
 
 export const metadata = {
   title: 'App IBB',
@@ -20,7 +21,8 @@ export default async function RootLayout({
   const session = await getServerSession(authOptions)
 
   if (!session) {
-    console.log({ message: 'You must be logged in.' })
+    // Signed in
+    console.log(session)
     return redirect('/login', RedirectType.replace)
   }
   return (
@@ -30,7 +32,10 @@ export default async function RootLayout({
           <div className="absolute top-0 -z-0 min-h-[18.75rem] w-screen bg-[#1D70B6]/90"></div>
           <div className="flex min-h-screen bg-slate-100">
             <Sidebar />
-            <Providers>{children}</Providers>
+            <div className="mx-auto w-full px-2 py-2">
+              <Header titlePage="Dashboard" />
+              <Providers>{children}</Providers>
+            </div>
           </div>
         </div>
       </body>

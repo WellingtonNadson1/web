@@ -11,10 +11,8 @@ type TypeLogin = {
   password: string
 }
 
-export default function Login() {
-  // const { data: session } = useSession()
+export default async function Login() {
   const router = useRouter()
-
   const { handleSubmit, register } = useForm<TypeLogin>()
 
   const onSubmit: SubmitHandler<TypeLogin> = async ({
@@ -26,7 +24,6 @@ export default function Login() {
       password,
       redirect: false,
     })
-
     if (result?.error) {
       return
     }
@@ -37,8 +34,6 @@ export default function Login() {
 
   return (
     <>
-      {/* {session && router.replace('/dashboard')}
-      {!session && ()} */}
       <section className="flex min-h-screen flex-col items-center justify-center gap-4 bg-[#F5F7F9]">
         {/* image */}
         <div className="flex items-center justify-center md:hidden">

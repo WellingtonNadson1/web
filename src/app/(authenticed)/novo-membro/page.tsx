@@ -1,6 +1,5 @@
 'use client'
-import Header from '@/components/Header'
-import React, { useState } from 'react'
+import React, { useState, Suspense } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import useSWR from 'swr'
 
@@ -85,7 +84,6 @@ export default function NovoMembro() {
 
   return (
     <div className="relative mx-auto w-full px-2 py-2">
-      <Header titlePage="Novo Membro" />
       <div className="flex justify-between">
         <div className="relative mx-auto px-2 py-7">
           <div className="mx-auto rounded-lg bg-white p-6">
@@ -387,12 +385,14 @@ export default function NovoMembro() {
                         className="block w-full rounded-md border-0 py-1.5 text-slate-700 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
                         onChange={handleSupervisaoSelecionada}
                       >
-                        {!isLoading &&
-                          supervisoes?.map((supervisao) => (
-                            <option key={supervisao.id} value={supervisao.id}>
-                              {supervisao.nome}
-                            </option>
-                          ))}
+                        <Suspense fallback={<option>carregando...</option>}>
+                          {!isLoading &&
+                            supervisoes?.map((supervisao) => (
+                              <option key={supervisao.id} value={supervisao.id}>
+                                {supervisao.nome}
+                              </option>
+                            ))}
+                        </Suspense>
                       </select>
                     </div>
                   </div>
@@ -411,12 +411,14 @@ export default function NovoMembro() {
                         name="celula"
                         className="block w-full rounded-md border-0 py-1.5 text-slate-700 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
                       >
-                        {!isLoading &&
-                          celulasFiltradas?.map((celula) => (
-                            <option key={celula.id} value={'Betel'}>
-                              {celula.nome}
-                            </option>
-                          ))}
+                        <Suspense fallback={<option>carregando...</option>}>
+                          {!isLoading &&
+                            celulasFiltradas?.map((celula) => (
+                              <option key={celula.id} value={'Betel'}>
+                                {celula.nome}
+                              </option>
+                            ))}
+                        </Suspense>
                       </select>
                     </div>
                   </div>

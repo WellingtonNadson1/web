@@ -34,6 +34,7 @@ declare module 'next-auth' {
       dateDecisao: string | Date
       situacao_no_reino: string
       cargo_de_lideranca: string
+      token: string
     }
   }
 }

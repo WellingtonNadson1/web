@@ -3,9 +3,6 @@ import CredentialProvider from 'next-auth/providers/credentials'
 import GoogleProvider from 'next-auth/providers/google'
 
 export const authOptions: NextAuthOptions = {
-  session: {
-    strategy: 'jwt',
-  },
   providers: [
     CredentialProvider({
       name: 'credentials',
@@ -18,6 +15,9 @@ export const authOptions: NextAuthOptions = {
       },
       // Implementando autenticação com API propria
       async authorize(credentials, req): Promise<any> {
+        if (!credentials!.email || !credentials!.password) {
+          return null
+        }
         const hostname = 'server-lac-nine.vercel.app'
         const URL = `https://${hostname}/login`
         const response = await fetch(URL, {
@@ -44,19 +44,23 @@ export const authOptions: NextAuthOptions = {
       clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
     }),
   ],
-  callbacks: {
-    async jwt({ token, user }) {
-      return { ...token, ...user }
-    },
-
-    async session({ session, token, user }) {
-      session.user = token as any
-      return session
-    },
+  session: {
+    strategy: 'jwt',
   },
-  // secret: process.env.NEXTAUTH_SCRET,
+  secret: process.env.NEXTAUTH_SECRET,
+  debug: process.env.NODE_ENV === 'development',
   pages: {
     signIn: '/login',
     signOut: '/login',
+  },
+  callbacks: {
+    async jwt({ token, user }) {
+      user && (token.user = user)
+      return token
+    },
+    async session({ session, token }) {
+      session.user = token.user as any
+      return session
+    },
   },
 }
