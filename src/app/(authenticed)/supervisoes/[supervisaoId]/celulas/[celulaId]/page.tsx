@@ -1,7 +1,7 @@
 'use client'
 import Calendar from '@/components/Calendar'
 import ControlePresenca from '@/components/ControlePresenca'
-import Header from '@/components/Header'
+// import Header from '@/components/Header'
 import LicoesCelula from '@/components/LicoesCelula'
 import { ICelula } from '@/components/ListCelulas'
 import { useParams } from 'next/navigation'
@@ -25,7 +25,7 @@ export default function ControleCelulaSupervision({
   return (
     <div className="relative mx-auto w-full px-2 py-2">
       <div className="relative mx-auto w-full">
-        <Header titlePage={`Célula ${data?.nome}`} />
+        {/* <Header titlePage={`Célula ${data?.nome}`} /> */}
       </div>
       <div className="relative mx-auto mb-4 mt-3 w-full px-2">
         <Calendar />

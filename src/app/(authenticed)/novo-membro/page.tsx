@@ -1,5 +1,6 @@
 'use client'
-import React, { useState, Suspense } from 'react'
+import { useSession } from 'next-auth/react'
+import React, { Suspense, useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import useSWR from 'swr'
 
@@ -50,6 +51,9 @@ export interface SupervisaoData {
 
 export default function NovoMembro() {
   const hostname = 'server-lac-nine.vercel.app'
+
+  const { data: session } = useSession()
+
   const { register, handleSubmit } = useForm<Inputs>()
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     const URL = `https://${hostname}/users`
@@ -62,10 +66,22 @@ export default function NovoMembro() {
     })
   }
 
-  const fetcher = (url: string) => fetch(url).then((res) => res.json())
+  console.log('Token User: ', `${session?.user?.token}`)
+
+  const fetcher = async (url: string, token: string) => {
+    return fetch(url, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }).then((res) => {
+      return res.json()
+    })
+  }
+
   const URL = `https://${hostname}/supervisoes`
   const { data: supervisoes, isLoading } = useSWR<SupervisaoData[]>(
-    URL,
+    session ? [URL, `${session?.user?.token}`] : null,
     fetcher,
   )
   console.log('Seguem as Supervisões do Cadastro', supervisoes)

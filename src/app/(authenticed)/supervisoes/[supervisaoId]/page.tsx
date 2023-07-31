@@ -1,5 +1,5 @@
 'use client'
-import Header from '@/components/Header'
+// import Header from '@/components/Header'
 import { ICelula } from '@/components/ListCelulas'
 import StatsCardSupervision from '@/components/StatsCardSupervision'
 import useSWR from 'swr'
@@ -41,7 +41,7 @@ export default function Supervisao({
   return (
     <div className="mx-auto w-full px-2 py-2">
       <div className="mx-auto w-full">
-        <Header titlePage={`${!error}` && `Supervisão ${supervisao.nome}`} />
+        {/* <Header titlePage={`${!error}` && `Supervisão ${supervisao.nome}`} /> */}
       </div>
       <StatsCardSupervision supervisao={supervisao} />
     </div>
