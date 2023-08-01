@@ -1,6 +1,6 @@
 'use client'
 import { useSession } from 'next-auth/react'
-import React, { Suspense, useState } from 'react'
+import React, { useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import useSWR from 'swr'
 
@@ -51,42 +51,75 @@ export interface SupervisaoData {
 
 export default function NovoMembro() {
   const hostname = 'server-lac-nine.vercel.app'
-
+  const URL = `https://${hostname}/supervisoes`
   const { data: session } = useSession()
-
   const { register, handleSubmit } = useForm<Inputs>()
+
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     const URL = `https://${hostname}/users`
     fetch(URL, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        Authorization: `Bearer ${session?.user.token}`,
       },
       body: JSON.stringify(data),
     })
   }
 
-  console.log('Token User: ', `${session?.user?.token}`)
+  const [supervisaoSelecionada, setSupervisaoSelecionada] = useState<string>()
 
-  const fetcher = async (url: string, token: string) => {
+  function fetchWithToken(url: string, token: string) {
     return fetch(url, {
-      method: 'GET',
       headers: {
         Authorization: `Bearer ${token}`,
       },
-    }).then((res) => {
-      return res.json()
     })
+      .then((response) => response.json())
+      .then((data) => {
+        return data
+      })
   }
 
-  const URL = `https://${hostname}/supervisoes`
-  const { data: supervisoes, isLoading } = useSWR<SupervisaoData[]>(
-    session ? [URL, `${session?.user?.token}`] : null,
-    fetcher,
-  )
-  console.log('Seguem as Supervisões do Cadastro', supervisoes)
+  fetchWithToken(URL, `${session?.user.token}`).then((data) => {
+    console.log('Resultado do FetchWithToken: ', data)
+  })
 
-  const [supervisaoSelecionada, setSupervisaoSelecionada] = useState<string>()
+  const {
+    data: supervisoes,
+    error,
+    isValidating,
+    isLoading,
+  } = useSWR<SupervisaoData[]>(
+    [URL, `${session?.user.token}`],
+    ([url, token]: [string, string]) => fetchWithToken(url, token),
+  )
+
+  if (isValidating) return console.log('Is Validating', isValidating)
+
+  if (error)
+    return (
+      <div className="mx-auto w-full px-2 py-2">
+        <div className="mx-auto w-full">
+          <div>failed to load</div>
+        </div>
+      </div>
+    )
+
+  if (isLoading)
+    return (
+      <div className="mx-auto w-full px-2 py-2">
+        <div className="mx-auto flex w-full items-center gap-2">
+          <div className="text-white">carregando...</div>
+        </div>
+      </div>
+    )
+
+  console.log('Token User: ', `${session?.user?.token}`)
+
+  if (!isLoading) {
+    console.log('Seguem as Supervisões do Cadastro', supervisoes)
+  }
 
   const handleSupervisaoSelecionada = (
     event: React.ChangeEvent<HTMLSelectElement>,
@@ -401,14 +434,12 @@ export default function NovoMembro() {
                         className="block w-full rounded-md border-0 py-1.5 text-slate-700 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
                         onChange={handleSupervisaoSelecionada}
                       >
-                        <Suspense fallback={<option>carregando...</option>}>
-                          {!isLoading &&
-                            supervisoes?.map((supervisao) => (
-                              <option key={supervisao.id} value={supervisao.id}>
-                                {supervisao.nome}
-                              </option>
-                            ))}
-                        </Suspense>
+                        {supervisoes &&
+                          supervisoes?.map((supervisao) => (
+                            <option key={supervisao.id} value={supervisao.id}>
+                              {supervisao.nome}
+                            </option>
+                          ))}
                       </select>
                     </div>
                   </div>
@@ -427,14 +458,12 @@ export default function NovoMembro() {
                         name="celula"
                         className="block w-full rounded-md border-0 py-1.5 text-slate-700 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
                       >
-                        <Suspense fallback={<option>carregando...</option>}>
-                          {!isLoading &&
-                            celulasFiltradas?.map((celula) => (
-                              <option key={celula.id} value={'Betel'}>
-                                {celula.nome}
-                              </option>
-                            ))}
-                        </Suspense>
+                        {supervisoes &&
+                          celulasFiltradas?.map((celula) => (
+                            <option key={celula.id} value={celula.id}>
+                              {celula.nome}
+                            </option>
+                          ))}
                       </select>
                     </div>
                   </div>

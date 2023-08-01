@@ -11,7 +11,7 @@ type TypeLogin = {
   password: string
 }
 
-export default async function Login() {
+export default function Login() {
   const router = useRouter()
   const { handleSubmit, register } = useForm<TypeLogin>()
 

@@ -1,27 +1,49 @@
 'use client'
-import { ISupervisaoData } from '@/app/(authenticed)/supervisoes/[supervisaoId]/page'
 import { UsersFour } from '@phosphor-icons/react'
+import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
-import React, { useEffect, useState } from 'react'
-
+import React from 'react'
 import useSWR from 'swr'
 
-export default async function StatsCardSupervisions() {
-  const [count, setCount] = useState(1)
-  useEffect(() => {
-    setCount(count + 1)
-    console.log('O estado count foi atualizado:', count)
-  }, [count])
+export interface SupervisaoDataCard {
+  id: string
+  nome: string
+  cor: string
+  supervisor: {
+    id: string
+    firstName: string
+  }
+}
 
+export default function StatsCardSupervisions() {
+  const { data: session } = useSession()
   const router = useRouter()
-  const fetcher = (url: string) => fetch(url).then((res) => res.json())
+
   const hostname = 'server-lac-nine.vercel.app'
   const URL = `https://${hostname}/supervisoes`
+
+  function fetchWithToken(url: string, token: string) {
+    return fetch(url, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        return data
+      })
+  }
+
   const {
     data: supervisoes,
     error,
+    isValidating,
     isLoading,
-  } = useSWR<ISupervisaoData[]>(URL, fetcher, { revalidateOnMount: false })
+  } = useSWR<SupervisaoDataCard[]>(
+    [URL, `${session?.user.token}`],
+    ([url, token]: [string, string]) => fetchWithToken(url, token),
+  )
+
   if (error)
     return (
       <div className="mx-auto w-full px-2 py-2">
@@ -30,6 +52,7 @@ export default async function StatsCardSupervisions() {
         </div>
       </div>
     )
+
   if (isLoading)
     return (
       <div className="mx-auto w-full px-2 py-2">
@@ -39,6 +62,8 @@ export default async function StatsCardSupervisions() {
       </div>
     )
 
+  if (isValidating) return console.log('Is Validating', isValidating)
+
   const handleSupervisaoSelecionada = (
     event: React.MouseEvent<HTMLElement>,
   ) => {
@@ -46,6 +71,9 @@ export default async function StatsCardSupervisions() {
     console.log('Esta aqui o ID clicado', id)
     router.push(`/supervisoes/${id}`)
   }
+
+  console.log('Supervisoes Component:', supervisoes)
+  console.log('Token in Component:', session?.user.token)
 
   return (
     <>
@@ -75,10 +103,10 @@ export default async function StatsCardSupervisions() {
               </div>
               <div className="flex items-center">
                 <span className="text-sm font-bold leading-normal text-emerald-500">
-                  {supervisao.nivel}
+                  {/* {supervisao.nivel} */}
                 </span>
                 <span className="ml-2 text-sm font-bold leading-normal text-gray-500">
-                  {supervisao.nivel}
+                  {/* {supervisao.nivel} */}
                 </span>
               </div>
             </div>
