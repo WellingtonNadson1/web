@@ -44,7 +44,7 @@ export default function StatsCardSupervisions() {
     ([url, token]: [string, string]) => fetchWithToken(url, token),
   )
 
-  if (error)
+  if (error) {
     return (
       <div className="mx-auto w-full px-2 py-2">
         <div className="mx-auto w-full">
@@ -52,8 +52,9 @@ export default function StatsCardSupervisions() {
         </div>
       </div>
     )
+  }
 
-  if (isLoading)
+  if (isLoading) {
     return (
       <div className="mx-auto w-full px-2 py-2">
         <div className="mx-auto flex w-full items-center gap-2">
@@ -61,8 +62,11 @@ export default function StatsCardSupervisions() {
         </div>
       </div>
     )
+  }
 
-  if (isValidating) return console.log('Is Validating', isValidating)
+  if (isValidating) {
+    console.log('Is Validating', isValidating)
+  }
 
   const handleSupervisaoSelecionada = (
     event: React.MouseEvent<HTMLElement>,

@@ -95,7 +95,9 @@ export default function NovoMembro() {
     ([url, token]: [string, string]) => fetchWithToken(url, token),
   )
 
-  if (isValidating) return console.log('Is Validating', isValidating)
+  if (isValidating) {
+    console.log('Is Validating', isValidating)
+  }
 
   if (error)
     return (
