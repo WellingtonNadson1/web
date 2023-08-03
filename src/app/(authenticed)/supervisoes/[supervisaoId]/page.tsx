@@ -2,6 +2,7 @@
 // import Header from '@/components/Header'
 import { ICelula } from '@/components/ListCelulas'
 import StatsCardSupervision from '@/components/StatsCardSupervision'
+import { useSession } from 'next-auth/react'
 import useSWR from 'swr'
 
 interface IUser {
@@ -30,13 +31,38 @@ export default function Supervisao({
   params: { supervisaoId: string }
 }) {
   console.log('Id da Supervisao aqui', supervisaoId)
+  const { data: session } = useSession()
 
-  const fetcher = (url: string) => fetch(url).then((res) => res.json())
   const hostname = 'server-lac-nine.vercel.app'
   const URL = `https://${hostname}/supervisoes/${supervisaoId}`
-  const { data: supervisao, error } = useSWR<ISupervisaoData>(URL, fetcher)
+
+  function fetchWithToken(url: string, token: string) {
+    return fetch(url, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        return data
+      })
+  }
+
+  const {
+    data: supervisao,
+    error,
+    isValidating,
+    isLoading,
+  } = useSWR<ISupervisaoData>(
+    [URL, `${session?.user.token}`],
+    ([url, token]: [string, string]) => fetchWithToken(url, token),
+  )
+
   if (error) return <div>failed to load</div>
-  if (!supervisao) return <div>loading...</div>
+  if (isLoading) return <div>loading...</div>
+  if (isValidating) {
+    console.log('Is Validating', isValidating)
+  }
 
   return (
     <div className="mx-auto w-full px-2 py-2">

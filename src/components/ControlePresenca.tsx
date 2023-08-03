@@ -1,5 +1,6 @@
 'use client'
 import { UserFocus } from '@phosphor-icons/react'
+import { useSession } from 'next-auth/react'
 import useSWR from 'swr'
 // import { useEffect, useState } from 'react'
 
@@ -48,90 +49,56 @@ interface User {
 }
 
 export default function ControlePresenca() {
-  // const membrosCelula = [
-  //   {
-  //     id: 1,
-  //     imagePerfil: '/images/man3.jpg',
-  //     nomeMembroCelula: 'Wellington',
-  //     status: 'Líder',
-  //     tipo: 'Membro',
-  //   },
-  //   {
-  //     id: 2,
-  //     imagePerfil: '/images/woman2.png',
-  //     nomeMembroCelula: 'Rafaelly',
-  //     status: 'Líder',
-  //     tipo: 'Membro',
-  //   },
-  //   {
-  //     id: 3,
-  //     imagePerfil: '/images/man6.png',
-  //     nomeMembroCelula: 'Rocha',
-  //     status: 'Ativo',
-  //     tipo: 'Membro',
-  //   },
-  //   {
-  //     id: 4,
-  //     imagePerfil: '/images/woman1.avif',
-  //     nomeMembroCelula: 'Carmem',
-  //     status: 'Ativo',
-  //     tipo: 'Membro',
-  //   },
-  //   {
-  //     id: 5,
-  //     imagePerfil: '/images/man4.png',
-  //     nomeMembroCelula: 'Washington',
-  //     status: 'Ativo',
-  //     tipo: 'Membro',
-  //   },
-  //   {
-  //     id: 6,
-  //     imagePerfil: '/images/woman3.png',
-  //     nomeMembroCelula: 'Socorro',
-  //     status: 'Ativo',
-  //     tipo: 'Membro',
-  //   },
-  //   {
-  //     id: 7,
-  //     imagePerfil: '/images/man1.avif',
-  //     nomeMembroCelula: 'Willian',
-  //     status: 'Ativo',
-  //     tipo: 'Membro',
-  //   },
-  //   {
-  //     id: 8,
-  //     imagePerfil: '/images/man5.png',
-  //     nomeMembroCelula: 'Magno',
-  //     status: 'Normal',
-  //     tipo: 'Membro',
-  //   },
-  //   {
-  //     id: 9,
-  //     imagePerfil: '/images/woman4.png',
-  //     nomeMembroCelula: 'Karol',
-  //     status: 'Normal',
-  //     tipo: 'Membro',
-  //   },
-  // ]
-  // const [users, setUsers] = useState<User[]>([])
+  const { data: session } = useSession()
 
-  // useEffect(() => {
-  //   const fetchUsers = async () => {
-  //     try {
-  //       const response = await fetch('http://localhost:3333/users')
-  //       const data: User[] = await response.json()
-  //       setUsers(data)
-  //       console.log('AQUI', data)
-  //     } catch (error) {
-  //       console.error('Deu erro na requisição: ', error)
-  //     }
-  //   }
-  //   fetchUsers()
-  // }, [])
-  const fetcher = (url: string) => fetch(url).then((res) => res.json())
   const hostname = 'server-lac-nine.vercel.app'
   const URL = `https://${hostname}/users`
-  const { data: users, isLoading } = useSWR<User[]>(URL, fetcher)
+
+  function fetchWithToken(url: string, token: string) {
+    return fetch(url, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        return data
+      })
+  }
+
+  const {
+    data: users,
+    error,
+    isValidating,
+    isLoading,
+  } = useSWR<User[]>(
+    [URL, `${session?.user.token}`],
+    ([url, token]: [string, string]) => fetchWithToken(url, token),
+  )
+
+  if (error) {
+    return (
+      <div className="mx-auto w-full px-2 py-2">
+        <div className="mx-auto w-full">
+          <div>failed to load</div>
+        </div>
+      </div>
+    )
+  }
+
+  if (isLoading) {
+    return (
+      <div className="mx-auto w-full px-2 py-2">
+        <div className="mx-auto flex w-full items-center gap-2">
+          <div className="text-white">carregando...</div>
+        </div>
+      </div>
+    )
+  }
+
+  if (isValidating) {
+    console.log('Is Validating', isValidating)
+  }
 
   return (
     <>
