@@ -37,12 +37,15 @@ export default function ListCelulas({ data }: ListCelulasProps) {
                     <th className="hidden text-start text-gray-800 sm:block">
                       Líder(es)
                     </th>
-                    <th className="text-gray-800">Presença</th>
+                    <th className="text-gray-800">Detalhes</th>
                   </tr>
                 </thead>
                 <tbody className="px-4">
                   {data?.map((celula, index) => (
-                    <tr className="rounded-lg hover:bg-gray-100/90" key={index}>
+                    <tr
+                      className="rounded-lg hover:bg-gray-100/90"
+                      key={celula.id}
+                    >
                       <td>
                         <h2 className="pl-2">{index + 1}</h2>
                       </td>

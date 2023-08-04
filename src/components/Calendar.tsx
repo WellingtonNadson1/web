@@ -200,6 +200,7 @@ export default function Example() {
                 ))}
               </div>
             </div>
+            {/* Section for the Events Day */}
             <section className="mt-12 md:mt-0 md:pl-14">
               <h2 className="font-semibold text-gray-900">
                 Agenda para{' '}
