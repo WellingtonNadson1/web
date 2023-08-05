@@ -14,30 +14,51 @@ interface Celula {
   }
 }
 
-export interface UserData {
+interface FetchError extends Error {
+  status?: number
+}
+
+interface User {
   id: string
   firstName?: string
 }
 
+// interface ILiderData {
+//   id: string
+// }
+
+// interface ISupervisaoData {
+//   id: string
+// }
+
+// interface IMember {
+//   id: string
+//   name: string
+// }
+
 interface Inputs {
-  nome: string
-  lider?: string
-  supervisao: string
-  membros?: UserData[]
-  date_inicio: string
-  date_multipicar: string
   cep: string
   cidade: string
-  estado: string
+  date_inicio: string
+  date_multipicar: string
   endereco: string
+  estado: string
+  lider: {
+    id: string
+  }
+  nome: string
   numero: string
+  supervisao: {
+    id: string
+  }
+  membros?: User[]
 }
 
 export interface SupervisaoData {
   id: string
   nome: string
   celulas: Celula[]
-  User: UserData[]
+  User: User[]
 }
 
 export default function Celulas() {
@@ -47,9 +68,33 @@ export default function Celulas() {
 
   const { data: session } = useSession()
   const [isLoadingSubmitForm, setIsLoadingSubmitForm] = useState(false)
-  const { register, handleSubmit } = useForm<Inputs>()
+  const { register, handleSubmit, setValue } = useForm<Inputs>()
+
+  const handleLiderChange = (selectedLiderId: string) => {
+    // Update the form value for lider.id using setValue
+    setValue('lider.id', selectedLiderId)
+  }
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
+    data.lider = { id: data.lider.id }
+    data.supervisao = { id: data.supervisao.id }
+    const memberArray = data.membros?.map((membro) => {
+      return { id: membro }
+    }) as User[] | undefined
+    data.membros = memberArray
+
+    const formatDatatoISO8601 = (dataString: string) => {
+      const dataObj = new Date(dataString)
+      return dataObj.toISOString()
+    }
+
+    data.date_inicio = formatDatatoISO8601(data.date_inicio)
+    data.date_multipicar = formatDatatoISO8601(data.date_multipicar)
+
+    console.log('Lider: ', data.lider)
+    console.log('Data: ', data)
+    console.log('Data Membros New: ', memberArray)
+
     setIsLoadingSubmitForm(true)
     const URL = `https://${hostname}/celulas`
     await fetch(URL, {
@@ -58,23 +103,40 @@ export default function Celulas() {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${session?.user.token}`,
       },
-      body: JSON.stringify(data),
+      body: JSON.stringify({
+        data,
+      }),
     })
     setIsLoadingSubmitForm(false)
   }
 
   const [supervisaoSelecionada, setSupervisaoSelecionada] = useState<string>()
 
-  function fetchWithToken(url: string, token: string) {
-    return fetch(url, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        return data
+  async function fetchWithToken(url: string, token: string) {
+    try {
+      const response = await fetch(url, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       })
+
+      if (!response.ok) {
+        const error: FetchError = new Error('Failed to fetch data with token.')
+        error.status = response.status
+        throw error
+      }
+
+      const data = await response.json()
+      return data
+    } catch (error) {
+      if (error instanceof Error) {
+        console.error('Error while fetching data with token:', error.message)
+        throw error
+      } else {
+        console.error('Unknown error occurred:', error)
+        throw new Error('Unknown error occurred.')
+      }
+    }
   }
 
   const {
@@ -154,14 +216,15 @@ export default function Celulas() {
                         <div className="mt-3">
                           <select
                             {...register('membros')}
+                            multiple={true}
                             id="membros"
                             name="membros"
                             className="block w-full rounded-md border-0 py-1.5 text-slate-700 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
                           >
                             {supervisoes &&
-                              usersFiltrados?.map((lider) => (
-                                <option key={lider.id} value={lider.id}>
-                                  {lider.firstName}
+                              usersFiltrados?.map((membro) => (
+                                <option key={membro.id} value={membro.id}>
+                                  {membro.firstName}
                                 </option>
                               ))}
                           </select>
@@ -200,7 +263,7 @@ export default function Celulas() {
                       <div className="mt-2">
                         <input
                           {...register('date_inicio')}
-                          type="date"
+                          type="datetime-local"
                           name="date_inicio"
                           id="date_inicio"
                           autoComplete="family-name"
@@ -219,7 +282,7 @@ export default function Celulas() {
                       <div className="mt-2">
                         <input
                           {...register('date_multipicar')}
-                          type="date"
+                          type="datetime-local"
                           name="date_multipicar"
                           id="date_multipicar"
                           autoComplete="family-name"
@@ -233,16 +296,16 @@ export default function Celulas() {
                   <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                     <div className="sm:col-span-3">
                       <label
-                        htmlFor="supervisao"
+                        htmlFor="supervisao.id"
                         className="block text-sm font-medium leading-6 text-slate-700"
                       >
                         Supervisão
                       </label>
                       <div className="mt-3">
                         <select
-                          {...register('supervisao')}
-                          id="supervisao"
-                          name="supervisao"
+                          {...register('supervisao.id')}
+                          id="supervisao.id"
+                          name="supervisao.id"
                           className="block w-full rounded-md border-0 py-1.5 text-slate-700 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
                           onChange={handleSupervisaoSelecionada}
                         >
@@ -258,16 +321,17 @@ export default function Celulas() {
 
                     <div className="sm:col-span-3">
                       <label
-                        htmlFor="lider"
+                        htmlFor="lider.id"
                         className="block text-sm font-medium leading-6 text-slate-700"
                       >
                         Líder
                       </label>
                       <div className="mt-3">
                         <select
-                          {...register('lider')}
-                          id="lider"
-                          name="lider"
+                          {...register('lider.id')}
+                          id="lider.id"
+                          name="lider.id"
+                          onChange={(e) => handleLiderChange(e.target.value)}
                           className="block w-full rounded-md border-0 py-1.5 text-slate-700 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
                         >
                           {supervisoes &&
